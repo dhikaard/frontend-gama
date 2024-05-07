@@ -1,0 +1,97 @@
+.register {
+    margin: 2.25rem 1rem;
+}
+
+.register .register-hero {
+    gap: 0.75rem;
+}
+
+.register .register-hero .gama-register {
+    border-radius: var(--Dimensions-Corner-Radius-lg, 6px);
+    background: #FAFAFA;
+}
+
+.register .register-title {
+    color: var(--mantine-color-gray-9);
+    font-weight: 400;
+    line-height: 1.75rem;
+}
+
+.register .register-subtitle {
+    color: var(--mantine-color-gray-7);
+    font-size: 0.75rem;
+    line-height: 1rem;
+}
+
+.register .form-register {
+    display: flex;
+    flex-direction: column;
+}
+
+.mantine-Fieldset-root {
+    padding: 16px;
+    margin: 0;
+}
+
+.register .form-register .register-input .mantine-TextInput-label	 {
+    font-weight: 600;
+    color: var(--mantine-color-gray-9);
+}
+
+.register .form-register .register-input .mantine-TextInput-input {
+    line-height: 1rem;
+    letter-spacing: 0.03125rem;
+}
+
+.register .form-register .register-input .mantine-TextInput-input:focus-within {
+    border: 1px solid #339AF0;
+}
+
+.register .form-register .register-input .mantine-TextInput-error {
+    border: 1px solid var(--Schemes-Error, #BA1A1A);
+    background-color: var(--Schemes-Error-Container, #FFDAD6);
+}
+
+.register .form-register .register-input .mantine-PasswordInput-input {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    letter-spacing: 0.03125rem;
+    color: var(--mantine-color-gray-9);
+    padding: 1rem 2.5rem;
+}
+
+.register .form-register .register-input .mantine-PasswordInput-input:focus-within  {
+    border: 1px solid var(--Schemes-Primary-Container, #C1EFAF);
+    background: #F7F7F7;
+}
+
+.register .form-register .register-input .mantine-PasswordInput-error {    
+    border: 1px solid var(--Schemes-Error, #BA1A1A);
+    background-color: var(--Schemes-Error-Container, #FFDAD6);
+}
+
+.register .form-register .btn-google .mantine-Button-label {
+    color: var(--mantine-color-gray-9);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.25rem;
+    letter-spacing: 0.00625rem;
+}
+
+.register .form-register .daftar-register {
+    color: var(--Schemes-On-Surface-Variant, #43483F);
+    line-height: 1rem;
+    letter-spacing: 0.025rem;
+}
+
+.register .form-register .daftar-register .mantine-Anchor-root {
+    color: #0F18FF;
+    line-height: 1rem;
+    letter-spacing: 0.03125rem;
+}
+
+.register .form-register .mantine-Anchor-root {
+    color: #0F18FF;
+    line-height: 1rem;
+    letter-spacing: 0.03125rem;
+}
