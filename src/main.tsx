@@ -12,6 +12,7 @@ import './assets/css/HomePage.module.css'
 import './assets/css/SignPage.css'
 import './assets/css/ForgotPassword.css'
 import './assets/css/SetorSampahPages.css'
+import './assets/css/ConfirmPage.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

@@ -1,4 +1,30 @@
-.hidden-card {
-    position: "absolute";
-    bottom: "0";
+.confirm-page {
+    margin: auto;
+    max-width: 25.75rem;
+    height: 100vh;
+    position: relative;
+}
+
+.confirm-page .header {
+    align-items: center;
+    justify-content: center;
+}
+
+.confirm-page .alert-info {
+    margin: 1.5rem 1rem;
+}
+
+.confirm-page .card {
+    color: var(--Dark-Dark-6, #25262B);
+    margin: 0.75rem 1rem;
+}
+
+.confirm-page .popup-confirm {
+    position: absolute;
+    bottom: 0;
+    width: 25.75rem;
+    height: 554px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    z-index: 10;
 }

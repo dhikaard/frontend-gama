@@ -9,196 +9,301 @@ import {
   Overlay,
   Stack,
   Text,
+  Title,
   Transition,
 } from "@mantine/core";
-import { IconExclamationMark } from "@tabler/icons-react";
-import { useState } from "react";
 import Barcode from "react-barcode";
+import { IconExclamationCircle } from "@tabler/icons-react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import "./../css/ConfirmPage.css";
+import "./../img/Vector.png";
 import { useClickOutside } from "@mantine/hooks";
 
 const ConfirmPage = () => {
+  const icon = <IconExclamationCircle />;
   const [isCloseAlert, setIsCloseAlert] = useState(true);
   const [isSubmited, setIsSubmited] = useState(false);
-  const stylePopUp = {
-    borderTopLeftRadius: "16px",
-    borderTopRightRadius: "16px",
-    position: "absolute",
-    bottom: "0",
-    zIndex: 100,
-  };
-  const ref = useClickOutside(() => {setIsSubmited(false)})
+  const ref = useClickOutside(() => setIsSubmited(false));
 
-  const handleClickButtonSubmit = () => {
-    setIsSubmited(!isSubmited);
+  const handleClickSubmit = () => {
+    setIsSubmited(true);
   };
 
-  const handleClickCloseAlert = () => {
-    setIsCloseAlert(false);
+  const handleClickClosePopUp = () => {
+    setIsSubmited(false);
   };
 
-  const icon = <IconExclamationMark />;
   return (
-    <div
-      style={{
-        width: "480px",
-        height: "100vh",
-        margin: "auto",
-        overflowY: "hidden",
-        position: "relative",
-      }}
-    >
-      <Container size={"xs"} w={"100%"} h="100vh">
-        {isCloseAlert && (
-          <Alert
-            title="Perhatian!"
-            icon={icon}
-            withCloseButton
-            closeButtonLabel="Dismiss"
-            mt={"12px"}
-            onClick={handleClickCloseAlert}
-          >
-            Pastikan semua informasi sudah benar dan lengkap. Anda tidak dapat
-            kembali ke halaman ini setelah menekan tombol "Ajukan".
-          </Alert>
-        )}
-        <Transition
-          mounted={isSubmited}
-          transition={"fade"}
-          duration={1000}
-          timingFunction="ease"
-          keepMounted
+    <div className="confirm-page">
+      <Container display="flex" bg="#F8F9FA" h="3.75rem" className="header">
+        <Title order={6} ta="center" lh="1.125rem" fw={600}>
+          Konfirmasi
+        </Title>
+      </Container>
+      {isCloseAlert && (
+        <Alert
+          variant="light"
+          color="blue"
+          title="Perhatian!"
+          withCloseButton
+          className="alert-info"
+          icon={icon}
+          onClick={() => {setIsCloseAlert(false)}}
         >
-          {(style) => (
-            <Overlay
-              bg={"#000"}
-              opacity={0.15}
-              style={{ ...style, zIndex: "-1" }}
-            />
-          )}
-        </Transition>
-        <Card
-          mt={"12px"}
-          mb={"54px"}
-          padding="lg"
-          radius="md"
-          withBorder
-          style={{
-            zIndex: "-2",
-          }}
-        >
-          <Text fw={"bold"} color="#25262B">
+          Pastikan semua informasi sudah benar dan lengkap. Anda tidak dapat
+          kembali ke halaman ini setelah menekan tombol "Ajukan".
+        </Alert>
+      )}
+      <Card
+        shadow="sm"
+        padding={"lg"}
+        radius={"md"}
+        withBorder
+        className="card"
+      >
+        <Stack>
+          <Title size={"sm"} fw={600} className="card-header">
             Bank Sampah Point
+          </Title>
+          <Text size="sm" lh={"4px"}>
+            Bank Sampah Candi Pawon
           </Text>
-          <Text color="#25262B">Bank Sampah Candi pawon</Text>
-          <Text color="#495057" mb={"16px"}>
-            Jl.Candi Pawon, Kota Semarang
+          <Text size="sm" color="#495057">
+            Jl. Candi Pawon, Kota Semarang
           </Text>
-          <Text fw={"bold"} color="#25262B">
-            Jenis sampah
-          </Text>
-          <Group mt={"8px"} justify="space-between">
-            <Text color="#495057">Botol Plastik</Text>
-            <Text color="#495057">12 kg</Text>
+        </Stack>
+        <Stack mt={"16px"}>
+          <Title size={"sm"} fw={600} className="card-header">
+            Jenis Sampah
+          </Title>
+          <Group justify="space-between">
+            <Text size="sm" lh={"4px"}>
+              Botol Plastik
+            </Text>
+            <Group>
+              <Text size="sm" lh={"4px"}>
+                12
+              </Text>
+              <Text size="sm" lh={"4px"} color="#495057">
+                kg
+              </Text>
+            </Group>
           </Group>
           <Divider />
-          <Group mt={"8px"} justify="space-between">
-            <Text color="#495057">Kertas</Text>
-            <Text color="#495057">12 kg</Text>
+          <Group justify="space-between">
+            <Text size="sm" lh={"4px"}>
+              Botol Plastik
+            </Text>
+            <Group>
+              <Text size="sm" lh={"4px"}>
+                12
+              </Text>
+              <Text size="sm" lh={"4px"} color="#495057">
+                kg
+              </Text>
+            </Group>
           </Group>
           <Divider />
-          <Text fw={"bold"} mt={"16px"} color="#25262B">
-            Metode Setor
+        </Stack>
+        <Stack mt={"16px"}>
+          <Title size={"sm"} fw={600} className="card-header">
+            Bank Sampah Point
+          </Title>
+          <Text size="sm" lh={"3px"}>
+            Antar Sendiri
           </Text>
-          <Text color="#25262B">Antar Sendiri</Text>
-          <Text color="#495057" mb={"16px"} size="sm">
+          <Text size="sm" color="#495057">
             Akan tiba di bank sampah point pada tanggal 02/03/2024 - Jam 13:00
             WIB.
           </Text>
-          <Text fw={"bold"} color="#25262B">
-            Koin
-          </Text>
-          <Group mt={"8px"} justify="space-between">
-            <Text color="#495057">Botol Plastik</Text>
-            <Text color="#495057">12 kg</Text>
-            <Text color="#495057">2 koin</Text>
+        </Stack>
+        <Stack mt={"16px"}>
+          <Title size={"sm"} fw={600} className="card-header">
+            Jenis Sampah
+          </Title>
+          <Group justify="space-between">
+            <Text size="sm" lh={"4px"}>
+              Botol Plastik
+            </Text>
+            <Group>
+              <Text size="sm" lh={"4px"}>
+                12
+              </Text>
+              <Text size="sm" lh={"4px"} color="#495057">
+                kg
+              </Text>
+            </Group>
+            <Group>
+              <Text size="sm" lh={"4px"}>
+                12
+              </Text>
+              <Text size="sm" lh={"4px"} color="#495057">
+                Koin
+              </Text>
+            </Group>
           </Group>
           <Divider />
-          <Group mt={"8px"} justify="space-between">
-            <Text color="#495057">Kertas</Text>
-            <Text color="#495057">12 kg</Text>
-            <Text color="#495057">2 koin</Text>
+          <Group justify="space-between">
+            <Text size="sm" lh={"4px"}>
+              Botol Plastik
+            </Text>
+            <Group>
+              <Text size="sm" lh={"4px"}>
+                12
+              </Text>
+              <Text size="sm" lh={"4px"} color="#495057">
+                kg
+              </Text>
+            </Group>
+            <Group>
+              <Text size="sm" lh={"4px"}>
+                12
+              </Text>
+              <Text size="sm" lh={"4px"} color="#495057">
+                Koin
+              </Text>
+            </Group>
           </Group>
           <Divider />
-          <Group mt={"8px"} mb={"18px"} justify="space-between">
-            <Text color="#495057">Total</Text>
-            <Text color="#495057">4 koin</Text>
+          <Group justify="space-between">
+            <Text size="sm" lh={"4px"}>
+              Botol Plastik
+            </Text>
+            <Group>
+              <Text size="sm" lh={"4px"}>
+                12
+              </Text>
+              <Text size="sm" lh={"4px"} color="#495057">
+                Koin
+              </Text>
+            </Group>
           </Group>
-          <Divider size={"md"} variant="dashed" mb={"16px"} />
-          <Center>
-            <Barcode value="youtube.com" format="CODE128" />
-          </Center>
-        </Card>
-        <Group mb={"44px"} justify="center">
-          <Button w={"47%"} size="md" variant="outline" color="#416835">
-            <Link to={"/"} style={{ color: "#416835" }}>
-              Kembali
-            </Link>
-          </Button>
-          <Button
-            w={"47%"}
-            size="md"
-            color="#416835"
-            onClick={handleClickButtonSubmit}
-          >
-            Ajukan
-          </Button>
-        </Group>
-      </Container>
+          <Divider variant="dashed" size={"md"} mt={"16px"} mb={"16px"} />
+        </Stack>
+        <Barcode value="youtube.com" height={"36px"} fontSize={"16px"} />
+      </Card>
+      <Group
+        grow
+        className="NavigationGroup"
+        display="flex"
+        justify="center"
+        align="center"
+        ml={"1rem"}
+        mr={"1rem"}
+        mt={"32px"}
+        pb={"54px"}
+      >
+        <Button
+          className="NavigationBtn"
+          variant="outline"
+          color="#416835"
+          radius="md"
+          size="md"
+          w="8rem"
+          fullWidth
+        >
+          <Link to={"/"} style={{ color: "#416835" }}>
+            Kembali
+          </Link>
+        </Button>
+        <Button
+          className="NavigationBtn"
+          variant="filled"
+          color="#416835"
+          radius="md"
+          size="md"
+          w="8rem"
+          fullWidth
+          onClick={handleClickSubmit}
+        >
+          Ajukan
+        </Button>
+      </Group>
+      <Transition
+        mounted={isSubmited}
+        transition={"fade"}
+        // duration={800}
+        timingFunction="ease"
+        keepMounted
+      >
+        {(style) => (
+          <Overlay
+            color="#000"
+            opacity={0.15}
+            zIndex={2}
+            style={style}
+            h={"100%"}
+          />
+        )}
+      </Transition>
       <Transition
         mounted={isSubmited}
         transition={"slide-up"}
-        duration={700}
+        duration={800}
         timingFunction="ease"
         keepMounted
       >
         {(style) => (
           <Container
-          ref={ref}
-            bg={"#fff"}
-            w={"100%"}
-            h={"70%"}
-            style={{ ...style, ...stylePopUp }}
+            ref={ref}
+            className="popup-confirm"
+            bg="white"
+            pos={"fixed"}
+            style={style}
           >
+            <Divider size={"md"} w={"100px"} m={"24px auto 48px"} />
             <Center>
-              <hr
-                style={{
-                  width: "50%",
-                  borderTop: "2px solid #ADB5BD",
-                  margin: "0 auto 48px",
-                  position: "absolute",
-                  top: 24,
-                  left: "50%",
-                  transform: "translateX(-50%)",
-                  cursor: "pointer",
-                }}
+              <img
+                src="/src/assets/img/Vector.png"
+                alt="Done"
+                style={{ margin: "auto" }}
               />
-              <Stack>
-                <img
-                  src="/src/assets/img/Vector.png"
-                  alt="Success"
-                  style={{width: "150px", margin: "64px auto 54px " }}
-                />
-                <Text size={"xl"} fw={"bold"} color="#25262B" style={{textAlign: 'center'}}>
-                  Pengajuan Berhasil!
-                </Text>
-                <Text color="#25262B" style={{textAlign: 'center'}}>
-                  Harap periksa riwayat Anda secara berkala untuk mengetahui
-                  perkembangan terbaru.
-                </Text>
-              </Stack>
             </Center>
+            <Center mt={"40px"}>
+              <Title size={"sm"} fw={600}>
+                Jenis Sampah
+              </Title>
+            </Center>
+            <Center mt={"24px"}>
+              <Text size="md" ta={"center"} color="#495057">
+                Harap periksa riwayat Anda secara berkala untuk mengetahui
+                perkembangan terbaru.
+              </Text>
+            </Center>
+            <Group
+              grow
+              className="NavigationGroup"
+              display="flex"
+              justify="center"
+              align="center"
+              ml={"1rem"}
+              mr={"1rem"}
+              mt={"106px"}
+            >
+              <Button
+                className="NavigationBtn"
+                variant="outline"
+                color="#416835"
+                radius="md"
+                size="md"
+                w="8rem"
+                fullWidth
+                onClick={handleClickClosePopUp}
+              >
+                Kembali
+              </Button>
+              <Button
+                className="NavigationBtn"
+                variant="filled"
+                color="#416835"
+                radius="md"
+                size="md"
+                w="8rem"
+                fullWidth
+              >
+                Ajukan
+              </Button>
+            </Group>
           </Container>
         )}
       </Transition>
