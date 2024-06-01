@@ -11,6 +11,7 @@ import SetorSampahPages from "./assets/Pages/SetorSampahPages";
 import ConfirmPage from "./assets/Pages/ConfirmPage";
 import HistoryPage from "./assets/Pages/HistoryPage";
 import DepositMethod from "./assets/Pages/DepositPage";
+import ExchangePage from "./assets/Pages/ExchangePage";
 
 
 function App() {
@@ -26,6 +27,8 @@ function App() {
         <Route path="/konfirmasi" element={<ConfirmPage />} />
         <Route path="/riwayat" element={<HistoryPage />} />
         <Route path="/metode" element={<DepositMethod />} />
+        <Route path="/penukaran" element={<ExchangePage />} />
+
       </Routes>
     </MantineProvider>
   )

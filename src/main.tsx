@@ -13,6 +13,8 @@ import './assets/css/SignPage.css'
 import './assets/css/ForgotPassword.css'
 import './assets/css/SetorSampahPages.css'
 import './assets/css/ConfirmPage.css'
+import './assets/css/ExchangePage.css'
+
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

@@ -90,15 +90,15 @@
   );
 
     const produkData = [
-      { nama: "Botol Plastik", logo: BottleIcon, bgColor: "#E7F5FF", counter: useCounter(0) },
-      { nama: "Kardus", logo: PackageIcon,  bgColor: "#F3F0FF", counter: useCounter(0)  },
-      { nama: "Kertas", logo: PaperIcon,  bgColor: "#F1F3F5", counter: useCounter(0) },
+      { nama: "Botol Plastik", logo: BottleIcon, bgColor: "#E7F5FF", counter: useCounter(0,  { min: 0 }) },
+      { nama: "Kardus", logo: PackageIcon,  bgColor: "#F3F0FF", counter: useCounter(0,  { min: 0 })  },
+      { nama: "Kertas", logo: PaperIcon,  bgColor: "#F1F3F5", counter: useCounter(0,  { min: 0 }) },
     ];
 
     return (
       <div className="setor-sampah">
         <Container display="flex" bg="#F8F9FA" h="3.75rem" className="header">
-          <Title order={6} ta="center" lh="1.125rem" fw={600}>
+          <Title order={6} ta="center" lh="1.125rem" fw={600} size="xl">
             Setor Sampah
           </Title>
         </Container>
