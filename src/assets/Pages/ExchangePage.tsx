@@ -94,6 +94,7 @@ function ExchangePage() {
     { nama: "Kardus", logo: PackageIcon,  bgColor: "#F3F0FF", point:"5000 Koin / 1 kg", counter: useCounter(0,   { min: 0 }) },
     { nama: "Kertas", logo: PaperIcon,  bgColor: "#F1F3F5", point:"500 Koin / ½ kg", counter: useCounter(0,   { min: 0 }) },
   ];
+  
 
   return (
     <div className="penukaran-sampah">
