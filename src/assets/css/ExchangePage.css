@@ -40,11 +40,30 @@
     padding: var(--Dimensions-Spacing-sm, 0.5rem) 0.75rem;
 }
 
+.text-background {
+    position: relative; /* Ensure the pseudo-element is positioned relative to this container */
+    padding: 1rem;
+    background-color: #3EB575; /* Fallback color if the image is not loaded */
+    color: white; /* Color of the text */
+    z-index: 1; /* Ensure the text stays on top */
+}
 
-@media screen and (min-width: 425px) {
-    .penukaran-sampah .main .navigation .NavigationGroup {
-        flex-direction: row;
+.text-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/src/assets/img/Pattern.png'); /* Provide the correct path to your image */
+    background-size: cover; /* Ensure the image covers the entire background */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent the background image from repeating */
+    opacity: 0.1; /* Set the opacity level of the background image */
+    border-radius: var(--Dimensions-Corner-Radius-xl, 0.5rem); /* Match the border-radius of the parent element */
+    z-index: -1; /* Ensure the background image is behind the text */
+}
 
-    }
-
+.text-card {
+    background-color: #F8F9FA;
 }
