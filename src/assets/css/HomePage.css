@@ -1,0 +1,69 @@
+.penukaran-sampah {
+  margin: auto;
+  max-width: 25.75rem;
+}
+
+.penukaran-sampah .header {
+  align-items: center;
+  justify-content: center;
+}
+
+.penukaran-sampah .main {
+  margin: 0 1rem;
+}
+
+.penukaran-sampah .main .mantine-Input-input {
+  border-radius: var(--Dimensions-Corner-Radius-xl, 0.5rem);
+  border: 1px solid var(--Gray-Gray-4, #CED4DA);
+}
+
+.penukaran-sampah .main .InputSampah {
+  gap: 0.25rem;
+}
+
+.penukaran-sampah .main .label .alert .mantine-Alert-message {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1rem;
+  color: var(--Dark-Dark-6, #25262B);
+}
+
+.penukaran-sampah .main .navigation {
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+}
+
+.penukaran-sampah .main .item-sampah {
+  border-radius: var(--Dimensions-Corner-Radius-xl, 0.5rem);
+  border: 1px solid var(--gray-4, #CED4DA);
+  padding: var(--Dimensions-Spacing-sm, 0.5rem) 0.75rem;
+}
+
+.text-background {
+  position: relative; /* Ensure the pseudo-element is positioned relative to this container */
+  padding: 1rem;
+  background-color: #3EB575; /* Fallback color if the image is not loaded */
+  color: white; /* Color of the text */
+  z-index: 1; /* Ensure the text stays on top */
+}
+
+.text-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/src/assets/img/Pattern.png'); /* Provide the correct path to your image */
+  background-size: cover; /* Ensure the image covers the entire background */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent the background image from repeating */
+  opacity: 0.1; /* Set the opacity level of the background image */
+  border-radius: var(--Dimensions-Corner-Radius-xl, 0.5rem); /* Match the border-radius of the parent element */
+  z-index: -1; /* Ensure the background image is behind the text */
+}
+
+.text-card {
+  background-color: #F8F9FA;
+}

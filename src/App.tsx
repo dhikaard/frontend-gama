@@ -4,7 +4,7 @@ import '@mantine/dates/styles.css';
 import { MantineProvider, createTheme, MantineColorsTuple } from '@mantine/core';
 
 // Import Pages
-import { HomePage } from "./assets/Pages/HomePage";
+import HomePage from "./assets/Pages/HomePage";
 import RegisterPage from "./assets/Pages/RegisterPage";
 import LoginPage from "./assets/Pages/LoginPage";
 import ForgotPassword from "./assets/Components/ForgotPassword";

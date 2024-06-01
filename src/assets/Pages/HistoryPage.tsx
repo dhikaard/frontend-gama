@@ -9,15 +9,15 @@ import {
   Text,
   Title,
   Transition,
-  Flex,
   Timeline,
+  rem,
 } from "@mantine/core";
 import Barcode from "react-barcode";
 import { useState } from "react";
 import "./../img/Vector.png";
 import { useClickOutside } from "@mantine/hooks";
 
-const ConfirmPage = () => {
+const Historypage = () => {
   const [isSubmited, setIsSubmited] = useState(false);
   const ref = useClickOutside(() => setIsSubmited(false));
 
@@ -238,8 +238,11 @@ const ConfirmPage = () => {
         )}
       </Transition>
 
-      <h3 id="status">Status pengajuan</h3> 
-      <br />
+      <Container className="timeline">  
+      <text >
+          status pengajuam
+      </text>
+     
       <Timeline radius="lg" active={2} bulletSize={25}>
         <Timeline.Item title="Pengajuan terkirim.">
           <Text c="dimmed" size="sm">
@@ -253,9 +256,10 @@ const ConfirmPage = () => {
           </Text>
         </Timeline.Item>
       </Timeline>
+      </Container>
     </div>
   );
 };
 
-export default ConfirmPage;
+export default Historypage;
 

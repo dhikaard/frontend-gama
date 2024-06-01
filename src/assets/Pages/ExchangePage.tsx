@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useCounter } from "@mantine/hooks";
+import { useCounter } from '@mantine/hooks';
 import {
   Group,
   Button,
@@ -11,42 +11,18 @@ import {
   Input,
   Alert,
   Avatar,
-  Card,
   Text,
 } from "@mantine/core";
-import {
-  IconMapPin,
-  IconInfoCircle,
-  IconPackage,
-  IconEgg,
-  IconBottle,
-  IconPlus,
-  IconMinus,
-} from "@tabler/icons-react";
+import { IconMapPin, IconInfoCircle, IconPackage, IconNotebook, IconBottle,  IconPlus, IconMinus } from "@tabler/icons-react";
 
 const dataLocal = [
-  {
-    bank_sampah: "Bank Sampah 1",
-    item_sampah: "bottle ,cardboard, paper",
-    location: "Suite 55",
-  },
-  {
-    bank_sampah: "Bank Sampah 2",
-    item_sampah: "paper, bottle",
-    location: "PO Box 41613",
-  },
-  {
-    bank_sampah: "Bank Sampah 3",
-    item_sampah: "bottle",
-    location: "PO Box 50058",
-  },
+  { bank_sampah: "Bank Sampah 1", item_sampah: "bottle ,cardboard, paper", location: "Suite 55" },
+  { bank_sampah: "Bank Sampah 2", item_sampah: "paper, bottle", location: "PO Box 41613" },
+  { bank_sampah: "Bank Sampah 3", item_sampah: "bottle", location: "PO Box 50058" },
   { bank_sampah: "Bank Sampah 4", item_sampah: "paper", location: "8th Floor" },
-  {
-    bank_sampah: "Bank Sampah 5",
-    item_sampah: "paper, cardboard",
-    location: "PO Box 57936",
-  },
+  { bank_sampah: "Bank Sampah 5", item_sampah: "paper, cardboard", location: "PO Box 57936" },
 ];
+
 
 function ExchangePage() {
   const IconMap = (
@@ -62,26 +38,31 @@ function ExchangePage() {
     />
   );
 
-  const BottleIcon = <IconBottle stroke={2} style={{ color: "#1971C2" }} />;
-  const PackageIcon = <IconPackage stroke={2} style={{ color: "#7950F2" }} />;
-  const PaperIcon = <IconEgg stroke={2} style={{ color: "#373A40" }} />;
+  const BottleIcon =(
+    <IconBottle
+      stroke={2}
+      style={{ color: "#1971C2"}}
+    />
+  );
+  const PackageIcon =(
+    <IconPackage
+      stroke={2}
+      style={{ color : "#7950F2"}}
+    />
+  );
+  const PaperIcon =(
+    <IconNotebook
+      stroke={2}
+      style={{ color : "#373A40" }}
+    />
+  );
 
-  const PlusIcon = (
-    <IconPlus
-      stroke={2}
-      style={{ width: rem("1.25rem"), height: rem("1.25rem") }}
-    />
-  );
-  const MinusIcon = (
-    <IconMinus
-      stroke={2}
-      style={{ width: rem("1.25rem"), height: rem("1.25rem") }}
-    />
-  );
+  const PlusIcon = <IconPlus stroke={2} style={{ width: rem("1.25rem"), height: rem("1.25rem") }} />;
+  const MinusIcon = <IconMinus stroke={2} style={{ width: rem("1.25rem"), height: rem("1.25rem") }} />;
+
 
   const [bankSampah, setBankSampah] = useState<any[]>([]);
   const [searchValue, setSearchValue] = useState("");
-  const [currentDate, setCurrentDate] = useState("");
 
   // handleClose Allert
   const [showAlert, setShowAlert] = useState(true);
@@ -95,44 +76,23 @@ function ExchangePage() {
   // }, []);
   useEffect(() => {
     setBankSampah(dataLocal);
-  }, []);
+  },[]);
 
-  useEffect(() => {
-    const today = new Date();
-    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
-    setCurrentDate(today.toLocaleDateString('id-ID', options));
-  }, []);
+
+  
 
   // Fungsi untuk melakukan pencarian
   // const filteredBankSampah = bankSampah.filter((item) =>
   //   item.toLowerCase().includes(searchValue.toLowerCase())
   // );
-  const filteredBankSampah = bankSampah
-    .map((item) => item.bank_sampah)
-    .filter((item) => item.toLowerCase().includes(searchValue.toLowerCase()));
+  const filteredBankSampah = bankSampah.map((item) => item.bank_sampah).filter((item) =>
+  item.toLowerCase().includes(searchValue.toLowerCase())
+);
 
   const produkData = [
-    {
-      nama: "Minyak ½ liter",
-      logo: BottleIcon,
-      bgColor: "#E7F5FF",
-      point: "1000 Koin / ½ liter",
-      counter: useCounter(0, { min: 0 }),
-    },
-    {
-      nama: "Beras 1 Kg",
-      logo: PackageIcon,
-      bgColor: "#F3F0FF",
-      point: "5000 Koin / 1 kg",
-      counter: useCounter(0, { min: 0 }),
-    },
-    {
-      nama: "Telur ½ Kg",
-      logo: PaperIcon,
-      bgColor: "#F1F3F5",
-      point: "500 Koin / ½ kg",
-      counter: useCounter(0, { min: 0 }),
-    },
+    { nama: "Botol Plastik", logo: BottleIcon, bgColor: "#E7F5FF", point:"1000 Koin / ½ liter", counter: useCounter(0,  { min: 0 }) },
+    { nama: "Kardus", logo: PackageIcon,  bgColor: "#F3F0FF", point:"5000 Koin / 1 kg", counter: useCounter(0,   { min: 0 }) },
+    { nama: "Kertas", logo: PaperIcon,  bgColor: "#F1F3F5", point:"500 Koin / ½ kg", counter: useCounter(0,   { min: 0 }) },
   ];
 
   return (
@@ -143,39 +103,6 @@ function ExchangePage() {
         </Title>
       </Container>
       <Flex className="main" direction="column" mt="1.5rem" mb="5rem">
-        <Card shadow="sm" padding="lg" radius="md" mb="0.75rem" withBorder>
-          <Card.Section className="text-background">
-            <Flex>
-              <Text fw={500} size="lg" mr="0.5rem">
-                Hai,
-              </Text>
-              <Text fw={700} size="lg" mb="sm">Roger Dias</Text>
-            </Flex>
-            <Group justify="space-between" mb="0.25rem">
-              <Flex align="center">
-                <Text size="1.5rem" fw={600} lh="120%" mr="8px">
-                  1000
-                </Text>
-                <Text size="md">Koin</Text>
-              </Flex>
-              <Text size="1.5rem" fw={600} lh="120%" mr="8px">
-                =
-              </Text>
-              <Flex align="center">
-                <Text size="1.5rem" fw={600} lh="120%" mr="8px">
-                  100.000
-                </Text>
-                <Text size="md">IDR</Text>
-              </Flex>
-            </Group>
-          </Card.Section>
-          <Card.Section className="text-card" color="#000">
-            <Text size="md" px="1rem" py="1rem" fw={400}>
-              {currentDate}
-            </Text>
-          </Card.Section>
-        </Card>
-
         <Autocomplete
           className="InputSampah"
           label="Bank sampah point"
@@ -209,8 +136,7 @@ function ExchangePage() {
               onClose={handleCloseAlert}
               lh="1rem"
             >
-              Jenis barang yang bisa ditukarkan terbatas, tergantung pada
-              kebijakan masing-masing bank sampah.
+              Jenis barang yang bisa ditukarkan terbatas, tergantung pada kebijakan masing-masing bank sampah.
             </Alert>
           )}
         </Flex>
@@ -259,23 +185,9 @@ function ExchangePage() {
         </Container>
 
         {produkData.map((produk, index) => (
-          <Flex
-            className="item-sampah"
-            direction="row"
-            align="center"
-            justify="space-between"
-            key={index}
-            mt="sm"
-          >
+          <Flex className="item-sampah" direction="row" align="center" justify="space-between" key={index} mt="sm">
             <Flex className="logo" gap={20}>
-              <Avatar
-                variant="defalut"
-                radius="md"
-                size="lg"
-                bg={produk.bgColor}
-              >
-                {produk.logo}
-              </Avatar>
+              <Avatar variant="defalut" radius="md" size="lg" bg={produk.bgColor}>{produk.logo}</Avatar>
               <Flex direction="column" justify="center">
                 <Text fw={600}>{produk.nama}</Text>
                 <Text size="sm" color="#868E96">
@@ -293,12 +205,7 @@ function ExchangePage() {
               >
                 {MinusIcon}
               </Button>
-              <Title ta="center" size="sm" fw={400} px="0.5rem">
-                {produk.counter[0]}
-                <Text pl="0.5rem" span c="#868E96">
-                  Kg
-                </Text>
-              </Title>
+              <Title ta="center" size="sm" fw={400} px="0.5rem">{produk.counter[0]}<Text pl="0.5rem" span c="#868E96">Kg</Text></Title>
               <Button
                 onClick={produk.counter[1].increment}
                 size="xs"

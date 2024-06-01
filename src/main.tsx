@@ -18,6 +18,7 @@ import './assets/css/HistoryPage.css'
 import './assets/css/DepositPage.css'
 
 
+import './assets/css/HomePage.css'
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
