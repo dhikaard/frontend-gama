@@ -9,6 +9,8 @@ import LoginPage from "./assets/Pages/LoginPage";
 import ForgotPassword from "./assets/Components/ForgotPassword";
 import SetorSampahPages from "./assets/Pages/SetorSampahPages";
 import ConfirmPage from "./assets/Pages/ConfirmPage";
+import HistoryPage from "./assets/Pages/HistoryPage";
+import DepositMethod from "./assets/Pages/DepositPage";
 
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
         <Route path="/lupa-sandi" element={<ForgotPassword />} />
         <Route path="/setor-sampah" element={<SetorSampahPages />} />
         <Route path="/konfirmasi" element={<ConfirmPage />} />
+        <Route path="/riwayat" element={<HistoryPage />} />
+        <Route path="/metode" element={<DepositMethod />} />
       </Routes>
     </MantineProvider>
   )
