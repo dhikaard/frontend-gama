@@ -12,6 +12,7 @@ import {
   Alert,
   Avatar,
   Text,
+  Card,
 } from "@mantine/core";
 import { IconMapPin, IconInfoCircle, IconPackage, IconNotebook, IconBottle,  IconPlus, IconMinus } from "@tabler/icons-react";
 
@@ -25,7 +26,13 @@ const dataLocal = [
 
 
 function ExchangePage() {
-  const IconMap = (
+  const [currentDate, setCurrentDate] = useState("");
+  useEffect(() => {
+    const today = new Date();
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    setCurrentDate(today.toLocaleDateString('id-ID', options));
+  }, []);
+  const IconMap = ( 
     <IconMapPin
       stroke={2}
       style={{ width: rem("1.25rem"), height: rem("1.25rem") }}
@@ -103,6 +110,38 @@ function ExchangePage() {
         </Title>
       </Container>
       <Flex className="main" direction="column" mt="1.5rem" mb="5rem">
+      <Card shadow="sm" padding="lg" radius="md" mb="0.75rem" withBorder>
+          <Card.Section className="text-background">
+            <Flex>
+              <Text fw={500} size="lg" mr="0.5rem">
+                Hai,
+              </Text>
+              <Text fw={700} size="lg" mb="sm">Roger Dias</Text>
+            </Flex>
+            <Group justify="space-between" mb="0.25rem">
+              <Flex align="center">
+                <Text size="1.5rem" fw={600} lh="120%" mr="8px">
+                  1000
+                </Text>
+                <Text size="md">Koin</Text>
+              </Flex>
+              <Text size="1.5rem" fw={600} lh="120%" mr="8px">
+                =
+              </Text>
+              <Flex align="center">
+                <Text size="1.5rem" fw={600} lh="120%" mr="8px">
+                  100.000
+                </Text>
+                <Text size="md">IDR</Text>
+              </Flex>
+            </Group>
+          </Card.Section>
+          <Card.Section className="text-card" color="#000">
+            <Text size="md" px="1rem" py="1rem" fw={400}>
+              {currentDate}
+            </Text>
+          </Card.Section>
+        </Card>
         <Autocomplete
           className="InputSampah"
           label="Bank sampah point"
