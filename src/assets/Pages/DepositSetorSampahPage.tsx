@@ -74,7 +74,7 @@ import { useState, useEffect } from "react";
     //     .then((data) => setBankSampah(data));
     // }, []);
     useEffect(() => {
-      setBankSampah(dataLocal);
+      // setBankSampah(dataLocal);
     },[]);
   
 
