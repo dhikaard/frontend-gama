@@ -16,11 +16,15 @@ import { useState, useEffect } from "react";
   } from "@mantine/core";
   import { IconMapPin, IconCalendar, IconInfoCircle, IconPackage, IconNotebook, IconBottle,  IconPlus, IconMinus } from "@tabler/icons-react";
 
-
+  const dataLocal = [
+    { bank_sampah: "Bank Sampah 1", item_sampah: "bottle ,cardboard, paper", location: "Suite 55" },
+    { bank_sampah: "Bank Sampah 2", item_sampah: "paper, bottle", location: "PO Box 41613" },
+    { bank_sampah: "Bank Sampah 3", item_sampah: "bottle", location: "PO Box 50058" },
+    { bank_sampah: "Bank Sampah 4", item_sampah: "paper", location: "8th Floor" },
+    { bank_sampah: "Bank Sampah 5", item_sampah: "paper, cardboard", location: "PO Box 57936" },
+  ];
   
-  
-
-  function SetorSampahPages() {
+  function DepositSetorSampahPage() {
     const [value, setValue] = useState<Date | null>(null);
     const icon = <IconCalendar style={{ width: rem(18), height: rem(18) }} stroke={1.5} />;
 
@@ -233,4 +237,4 @@ import { useState, useEffect } from "react";
     );
   }
 
-  export default SetorSampahPages;
+  export default DepositSetorSampahPage;
