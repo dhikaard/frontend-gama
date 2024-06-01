@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useCounter } from '@mantine/hooks';
+import { DateTimePicker } from '@mantine/dates';
 import {
   Group,
   Button,
@@ -13,7 +14,16 @@ import {
   Avatar,
   Text,
 } from "@mantine/core";
-import { IconMapPin, IconInfoCircle, IconPackage, IconNotebook, IconBottle,  IconPlus, IconMinus } from "@tabler/icons-react";
+import {
+  IconMapPin,
+  IconCalendar,
+  IconInfoCircle,
+  IconPackage,
+  IconNotebook,
+  IconBottle,
+  IconPlus,
+  IconMinus
+} from "@tabler/icons-react";
 
 const dataLocal = [
   { bank_sampah: "Bank Sampah 1", item_sampah: "bottle ,cardboard, paper", location: "Suite 55" },
@@ -23,8 +33,10 @@ const dataLocal = [
   { bank_sampah: "Bank Sampah 5", item_sampah: "paper, cardboard", location: "PO Box 57936" },
 ];
 
+function DepositSetorSampahPage() {
+  const [value, setValue] = useState<Date | null>(null);
+  const icon = <IconCalendar style={{ width: rem(18), height: rem(18) }} stroke={1.5} />;
 
-function ExchangePage() {
   const IconMap = (
     <IconMapPin
       stroke={2}
@@ -60,7 +72,6 @@ function ExchangePage() {
   const PlusIcon = <IconPlus stroke={2} style={{ width: rem("1.25rem"), height: rem("1.25rem") }} />;
   const MinusIcon = <IconMinus stroke={2} style={{ width: rem("1.25rem"), height: rem("1.25rem") }} />;
 
-
   const [bankSampah, setBankSampah] = useState<any[]>([]);
   const [searchValue, setSearchValue] = useState("");
 
@@ -69,40 +80,34 @@ function ExchangePage() {
   const handleCloseAlert = () => setShowAlert(false);
 
   // Fetch nama bank sampah dari data local
-  // useEffect(() => {
-  //   fetch("https://dummyjson.com/products/categories")
-  //     .then((res) => res.json())
-  //     .then((data) => setBankSampah(data));
-  // }, []);
   useEffect(() => {
     setBankSampah(dataLocal);
   },[]);
 
-
-  
-
   // Fungsi untuk melakukan pencarian
-  // const filteredBankSampah = bankSampah.filter((item) =>
-  //   item.toLowerCase().includes(searchValue.toLowerCase())
-  // );
   const filteredBankSampah = bankSampah.map((item) => item.bank_sampah).filter((item) =>
-  item.toLowerCase().includes(searchValue.toLowerCase())
-);
+    item.toLowerCase().includes(searchValue.toLowerCase())
+  );
 
   const produkData = [
-    { nama: "Botol Plastik", logo: BottleIcon, bgColor: "#E7F5FF", point:"1000 Koin / ½ liter", counter: useCounter(0,  { min: 0 }) },
-    { nama: "Kardus", logo: PackageIcon,  bgColor: "#F3F0FF", point:"5000 Koin / 1 kg", counter: useCounter(0,   { min: 0 }) },
-    { nama: "Kertas", logo: PaperIcon,  bgColor: "#F1F3F5", point:"500 Koin / ½ kg", counter: useCounter(0,   { min: 0 }) },
+    { nama: "Botol Plastik", logo: BottleIcon, bgColor: "#E7F5FF", counter: useCounter(0) },
+    { nama: "Kardus", logo: PackageIcon,  bgColor: "#F3F0FF", counter: useCounter(0)  },
+    { nama: "Kertas", logo: PaperIcon,  bgColor: "#F1F3F5", counter: useCounter(0) },
   ];
 
   return (
-    <div className="penukaran-sampah">
+    <div className="setor-sampah">
       <Container display="flex" bg="#F8F9FA" h="3.75rem" className="header">
-        <Title order={6} ta="center" lh="1.125rem" fw={600} size="xl">
-          Penukaran
+        <Title order={6} ta="center" lh="1.125rem" fw={600}>
+          Metode Setor 
         </Title>
       </Container>
       <Flex className="main" direction="column" mt="1.5rem" mb="5rem">
+      <DateTimePicker
+      label="Pick date and time"
+      placeholder="Pick date and time"
+    />
+
         <Autocomplete
           className="InputSampah"
           label="Bank sampah point"
@@ -114,7 +119,6 @@ function ExchangePage() {
           rightSection={IconMap}
           comboboxProps={{ shadow: "md" }}
           withAsterisk
-          pointer
         />
 
         <Flex className="label" mt="sm" direction="column">
@@ -134,9 +138,9 @@ function ExchangePage() {
               title="Perhatian!"
               icon={IconInfo}
               onClose={handleCloseAlert}
-              lh="1rem"
             >
-              Jenis barang yang bisa ditukarkan terbatas, tergantung pada kebijakan masing-masing bank sampah.
+              Jenis sampah yang dapat disetorkan ke bank sampah terbatas,
+              tergantung pada kebijakan masing-masing bank sampah.
             </Alert>
           )}
         </Flex>
@@ -188,10 +192,10 @@ function ExchangePage() {
           <Flex className="item-sampah" direction="row" align="center" justify="space-between" key={index} mt="sm">
             <Flex className="logo" gap={20}>
               <Avatar variant="defalut" radius="md" size="lg" bg={produk.bgColor}>{produk.logo}</Avatar>
-              <Flex direction="column" justify="center">
+              <Flex direction="column" justify="center" gap={6}>
                 <Text fw={600}>{produk.nama}</Text>
                 <Text size="sm" color="#868E96">
-                  {produk.point}
+                  2 Koin / pcs
                 </Text>
               </Flex>
             </Flex>
@@ -223,4 +227,4 @@ function ExchangePage() {
   );
 }
 
-export default ExchangePage;
+export default DepositSetorSampahPage;
