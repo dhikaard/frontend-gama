@@ -10,6 +10,7 @@ import LoginPage from "./assets/Pages/LoginPage";
 import ForgotPassword from "./assets/Components/ForgotPassword";
 import SetorSampahPages from "./assets/Pages/SetorSampahPages";
 import ConfirmPage from "./assets/Pages/ConfirmPage";
+import ConfirmPenukaranPage from "./assets/Pages/ConfirmPenukaranPage";
 import HistoryPage from "./assets/Pages/HistoryPage";
 import DepositSetorSampahPage from "./assets/Pages/DepositSetorSampahPage";
 import DepositPenukaranPage from "./assets/Pages/DepositPenukaranPage";
@@ -27,6 +28,7 @@ function App() {
         <Route path="/lupa-sandi" element={<ForgotPassword />} />
         <Route path="/setor-sampah" element={<SetorSampahPages />} />
         <Route path="/konfirmasi" element={<ConfirmPage />} />
+        <Route path="/konfirmasi-penukaran" element={<ConfirmPenukaranPage />} />
         <Route path="/riwayat" element={<HistoryPage />} />
         <Route path="/metode-setor" element={<DepositSetorSampahPage />} />
         <Route path="/metode-penukaran" element={<DepositPenukaranPage />} />
