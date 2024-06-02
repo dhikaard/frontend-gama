@@ -20,7 +20,7 @@ import { useState, useEffect } from "react";
   
   
 
-  function SetorSampahPages() {
+  function DepositSetorSampahPage() {
     const [value, setValue] = useState<Date | null>(null);
     const icon = <IconCalendar style={{ width: rem(18), height: rem(18) }} stroke={1.5} />;
 
@@ -233,4 +233,4 @@ import { useState, useEffect } from "react";
     );
   }
 
-  export default SetorSampahPages;
+  export default DepositSetorSampahPage;

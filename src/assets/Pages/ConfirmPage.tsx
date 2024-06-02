@@ -11,6 +11,7 @@ import {
   Text,
   Title,
   Transition,
+  Flex
 } from "@mantine/core";
 import Barcode from "react-barcode";
 import { IconExclamationCircle } from "@tabler/icons-react";
@@ -49,6 +50,7 @@ const ConfirmPage = () => {
           className="alert-info"
           icon={icon}
           onClick={() => {setIsCloseAlert(false)}}
+          lh="1rem"
         >
           Pastikan semua informasi sudah benar dan lengkap. Anda tidak dapat
           kembali ke halaman ini setelah menekan tombol "Ajukan".
@@ -61,17 +63,17 @@ const ConfirmPage = () => {
         withBorder
         className="card"
       >
-        <Stack>
-          <Title size={"sm"} fw={600} className="card-header">
+        <Flex direction="column">
+          <Title size={"sm"} fw={600} mb="0.25rem" className="card-header">
             Bank Sampah Point
           </Title>
-          <Text size="sm" lh={"4px"}>
+          <Text size="sm" lh={"1rem"}>
             Bank Sampah Candi Pawon
           </Text>
-          <Text size="sm" color="#495057">
+          <Text size="sm" color="#868E96" lh="1rem">
             Jl. Candi Pawon, Kota Semarang
           </Text>
-        </Stack>
+        </Flex>
         <Stack mt={"16px"}>
           <Title size={"sm"} fw={600} className="card-header">
             Jenis Sampah
@@ -84,42 +86,42 @@ const ConfirmPage = () => {
               <Text size="sm" lh={"4px"}>
                 12
               </Text>
-              <Text size="sm" lh={"4px"} color="#495057">
-                kg
+              <Text size="sm" lh={"4px"} color="#868E96">
+                Kg
               </Text>
             </Group>
           </Group>
           <Divider />
           <Group justify="space-between">
             <Text size="sm" lh={"4px"}>
-              Botol Plastik
+              Kertas
             </Text>
             <Group>
               <Text size="sm" lh={"4px"}>
                 12
               </Text>
-              <Text size="sm" lh={"4px"} color="#495057">
-                kg
+              <Text size="sm" lh={"4px"} color="#868E96">
+                Kg
               </Text>
             </Group>
           </Group>
           <Divider />
         </Stack>
-        <Stack mt={"16px"}>
-          <Title size={"sm"} fw={600} className="card-header">
-            Bank Sampah Point
+        <Flex mt={"16px"} direction="column">
+          <Title size={"sm"} fw={600} className="card-header" mb="0.25rem">
+            Metode Setor
           </Title>
-          <Text size="sm" lh={"3px"}>
+          <Text size="sm" lh={"0.875rem"}>
             Antar Sendiri
           </Text>
-          <Text size="sm" color="#495057">
+          <Text size="xs" color="#495057" >
             Akan tiba di bank sampah point pada tanggal 02/03/2024 - Jam 13:00
             WIB.
           </Text>
-        </Stack>
+        </Flex>
         <Stack mt={"16px"}>
           <Title size={"sm"} fw={600} className="card-header">
-            Jenis Sampah
+            Koin  
           </Title>
           <Group justify="space-between">
             <Text size="sm" lh={"4px"}>
@@ -129,15 +131,15 @@ const ConfirmPage = () => {
               <Text size="sm" lh={"4px"}>
                 12
               </Text>
-              <Text size="sm" lh={"4px"} color="#495057">
-                kg
+              <Text size="sm" lh={"4px"} color="#868E96">
+                Kg
               </Text>
             </Group>
             <Group>
               <Text size="sm" lh={"4px"}>
-                12
+                100
               </Text>
-              <Text size="sm" lh={"4px"} color="#495057">
+              <Text size="sm" lh={"4px"} color="#868E96">
                 Koin
               </Text>
             </Group>
@@ -151,15 +153,15 @@ const ConfirmPage = () => {
               <Text size="sm" lh={"4px"}>
                 12
               </Text>
-              <Text size="sm" lh={"4px"} color="#495057">
-                kg
+              <Text size="sm" lh={"4px"} color="#868E96">
+                Kg
               </Text>
             </Group>
             <Group>
               <Text size="sm" lh={"4px"}>
-                12
+                100
               </Text>
-              <Text size="sm" lh={"4px"} color="#495057">
+              <Text size="sm" lh={"4px"} color="#868E96">
                 Koin
               </Text>
             </Group>
@@ -167,13 +169,13 @@ const ConfirmPage = () => {
           <Divider />
           <Group justify="space-between">
             <Text size="sm" lh={"4px"}>
-              Botol Plastik
+              Total
             </Text>
             <Group>
               <Text size="sm" lh={"4px"}>
-                12
+                -12
               </Text>
-              <Text size="sm" lh={"4px"} color="#495057">
+              <Text size="sm" lh={"4px"} color="#868E96">
                 Koin
               </Text>
             </Group>
@@ -290,7 +292,7 @@ const ConfirmPage = () => {
                 fullWidth
                 onClick={handleClickClosePopUp}
               >
-                Kembali
+                Cek Riwayat
               </Button>
               <Button
                 className="NavigationBtn"
@@ -301,7 +303,7 @@ const ConfirmPage = () => {
                 w="8rem"
                 fullWidth
               >
-                Ajukan
+                Ke Beranda
               </Button>
             </Group>
           </Container>

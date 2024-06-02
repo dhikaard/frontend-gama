@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useCounter } from "@mantine/hooks";
 import { DateTimePicker } from "@mantine/dates";
 import {
   Group,
@@ -20,8 +19,12 @@ import {
   IconInfoCircle,
   IconPackage,
   IconNotebook,
-  IconBottle
+  IconBottle,
+  IconAlertTriangle
 } from "@tabler/icons-react";
+import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
+
 
 const dataLocal = [
   {
@@ -47,7 +50,39 @@ const dataLocal = [
   },
 ];
 
-function DepositSetorSampahPage() {
+
+
+
+function DepositPenukaranPage() {
+  const navigate = useNavigate();
+  
+  const [ambilSendiri, setAmbilSendiri] = useState<any[]>([]);
+  const [selectedBankSampah, setSelectedBankSampah] = useState("");
+  const [showAlertBankSampahPoint, setShowAlertBankSampahPoint] = useState(false);
+  const [bankSampah, setBankSampah] = useState<any[]>([]);
+  const [searchValue, setSearchValue] = useState("");
+
+
+
+  const validationSchema = Yup.object().shape({
+    ambilSendiri: Yup.date().required('Silahkan memilih tanggal dan jam').nullable(),
+  });
+
+  
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+  
+    const values = { bankSampah: selectedBankSampah };
+    validationSchema.validate(values).then(() => {
+      navigate('/konfirmasi-penukaran');
+    }).catch((error) => {
+      setShowAlertBankSampahPoint(true);
+    });
+  };
+
+  useEffect(() => {
+    setAmbilSendiri(dataLocal);
+  }, []);
 
   const IconCalendarInput = (
     <IconCalendar style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
@@ -67,8 +102,6 @@ function DepositSetorSampahPage() {
     />
   );
 
-  const [bankSampah, setBankSampah] = useState<any[]>([]);
-  const [searchValue, setSearchValue] = useState("");
 
 
   // handleClose Allert
@@ -93,34 +126,64 @@ function DepositSetorSampahPage() {
         </Title>
       </Container>
       <Flex className="main" direction="column" mt="1.5rem" mb="5rem">
+      <form onSubmit={handleSubmit}>
+      {showAlertBankSampahPoint && (
+            <Alert
+              className="alert"
+              mb="sm"
+              variant="light"
+              color="red"
+              radius="md"
+              withCloseButton
+              title="Perhatian!"
+              icon={<IconAlertTriangle />}
+              onClose={() => setShowAlertBankSampahPoint(false)}
+              lh="1rem"
+              
+            >
+              Silahkan untuk memilih tanggal dan jam terlebih dahulu.
+            </Alert>
+          )}
         <DateTimePicker
           rightSection={IconCalendarInput}
           rightSectionPointerEvents="none"
           label="Ambil sendiri"
           description="Masukkan tanggal dan jam saat menyetorkan sampah."
           withAsterisk
+          onChange={(value) => {
+            setSelectedBankSampah(value);
+          }}
+          error={showAlertBankSampahPoint}
+          styles={{
+            input: {
+              borderColor: showAlertBankSampahPoint ? 'red' : undefined,
+              '&:focus': {
+                borderColor: showAlertBankSampahPoint ? 'red' : undefined,
+              },
+            },
+          }}
         />
 
-{showAlert && (
-              <Alert
-                className="alert"
-                my="xs"
-                variant="light"
-                color="blue"
-                radius="md"
-                withCloseButton
-                title="Perhatian!"
-                icon={IconInfo}
-                onClose={handleCloseAlert}
-                lh="1rem"
-              >
-                Layanan antar ke rumah belum tersedia di bank sampah ini.
-              </Alert>
-            )}
+        {showAlert && (
+          <Alert
+            className="alert"
+            my="xs"
+            variant="light"
+            color="blue"
+            radius="md"
+            withCloseButton
+            title="Perhatian!"
+            icon={IconInfo}
+            onClose={handleCloseAlert}
+            lh="1rem"
+          >
+            Layanan antar ke rumah belum tersedia di bank sampah ini.
+          </Alert>
+        )}
 
         <Autocomplete
           className="InputSampah"
-          variant="filled"
+          disabled
           label="Antar ke rumah"
           description="Masukkan alamat rumah Anda."
           rightSectionPointerEvents="none"
@@ -138,7 +201,7 @@ function DepositSetorSampahPage() {
           right={0}
           className="navigation"
           mt="1rem"
-          style={{ zIndex: 10 }} // Menetapkan z-index di sini
+          style={{ zIndex: 10 }}
         >
           <Group
             grow
@@ -155,10 +218,11 @@ function DepositSetorSampahPage() {
               size="md"
               w="8rem"
               fullWidth
-            >
+              >
               Kembali
             </Button>
             <Button
+              type="submit"
               className="NavigationBtn"
               variant="filled"
               color="#416835"
@@ -171,10 +235,10 @@ function DepositSetorSampahPage() {
             </Button>
           </Group>
         </Container>
-
+      </form>
       </Flex>
     </div>
   );
 }
 
-export default DepositSetorSampahPage;
+export default DepositPenukaranPage;
