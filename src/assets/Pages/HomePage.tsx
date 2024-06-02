@@ -19,10 +19,8 @@ import {
   IconRecycle,
   IconExchange,
 } from "@tabler/icons-react";
-import Gambar1 from "../img/image 1.png";
+import Gambar1 from "../img/img.png";
 import Gambar2 from "../img/Image Item.png";
-
-
 
 const dataLocal = [
   {
@@ -223,15 +221,6 @@ function HomePage() {
             height={160}
             alt="Event"
           />
-          <Text mt="md" size="sm" fw={500}>
-            #event
-          </Text>
-          <Text size="lg" fw={700}>
-            Preserving Natural Beauty for Future Generations!
-          </Text>
-          <Text size="sm" color="dimmed">
-            Semarang City
-          </Text>
         </Card>
       </Container>
 
