@@ -9,10 +9,12 @@ import {
   PasswordInput,
   Divider,
   Anchor,
+  Alert,
 } from "@mantine/core";
+import { IconAlertTriangle } from "@tabler/icons-react";
 import { useForm, isEmail, isNotEmpty, hasLength } from "@mantine/form";
+import { useNavigate } from 'react-router-dom';
 import LogoGama from "../img/logo.svg";
-import LogoGamaType from "../img/logotype.svg";
 
 // Import Icon
 import { GoogleButton } from "../Components/GoogleButton";
@@ -21,19 +23,21 @@ import axios from "axios";
 
 function RegisterPage() {
   const [url, setUrl] = useState("");
+  const [error, setError] = useState("");
+
   const form = useForm({
     initialValues: {
-      nama_lengkap: "",
-      tempat_tinggal: "",
-      nomer: "",
+      full_name: "",
+      address: "",
+      phone_number: "",
       email: "",
       password: "",
     },
 
     validate: {
-      nama_lengkap: hasLength({ min: 2, max: 45 }),
-      tempat_tinggal: isNotEmpty(),
-      nomer: hasLength({ min: 2, max: 15 }),
+      full_name: hasLength({ min: 2, max: 45 }),
+      address: isNotEmpty(),
+      phone_number: hasLength({ min: 2, max: 15 }),
       email: isEmail(),
       password: isNotEmpty(),
     },
@@ -47,11 +51,28 @@ function RegisterPage() {
       });
   }, []);
 
+  const navigate = useNavigate();
+  const handleSubmit = async (values) => {
+
+    try {
+      const response = await axios.post("http://127.0.0.1:8000/api/v1/auth/register", values);
+      console.log("Registrasi berhasil:", response.data);
+      navigate('/masuk');
+    } catch (error) {
+      if (error.response) {
+        setError(error.response.data.errors || "Registrasi gagal. Silakan coba lagi.");
+      } else if (error.request) {
+        setError("Tidak ada respon dari server. Silakan coba lagi.");
+      } else {
+        setError("Terjadi kesalahan dalam mengatur permintaan. Silakan coba lagi.");
+      }
+    }
+  };
+
   return (
     <div className="register">
       <Flex className="register-hero" direction="column" align="center">
         <img src={LogoGama} alt="Logo Gama" className="gama-register" />
-        <img src={LogoGamaType} alt="Gama" />
       </Flex>
 
       <Flex my="1.5rem" direction="column" gap="8" align="center">
@@ -68,15 +89,31 @@ function RegisterPage() {
         maw={340}
         mx="auto"
         className="form-register"
-        onSubmit={form.onSubmit(() => {})}
+        onSubmit={form.onSubmit(handleSubmit)}
       >
+        {error && (
+          <Alert
+            className="alert"
+            mb="sm"
+            variant="light"
+            color="red"
+            radius="md"
+            withCloseButton
+            title="Perhatian!"
+            icon={<IconAlertTriangle />}
+            onClose={() => setError("")}
+            lh="1rem"
+          >
+            {error.phone_number}
+          </Alert>
+        )}
         <TextInput
           className="register-input"
           label="Nama Lengkap"
           withAsterisk
           radius="xl"
           placeholder="cth. Ferdyan Steevandio"
-          {...form.getInputProps("nama_lengkap")}
+          {...form.getInputProps("full_name")}
         />
 
         <TextInput
@@ -86,7 +123,7 @@ function RegisterPage() {
           mt="0.56rem"
           radius="xl"
           placeholder="cth. Ngaliyan, Kota Semarang"
-          {...form.getInputProps("tempat_tinggal")}
+          {...form.getInputProps("address")}
         />
 
         <TextInput
@@ -96,7 +133,7 @@ function RegisterPage() {
           mt="0.56rem"
           radius="xl"
           placeholder="cth. 081234567890"
-          {...form.getInputProps("nomer")}
+          {...form.getInputProps("phone_number")}
         />
 
         <TextInput
@@ -127,11 +164,7 @@ function RegisterPage() {
 
         <Divider label="atau" labelPosition="center" my="xs" />
 
-        <GoogleButton
-          className="btn-google"
-          fullWidth
-          radius="xl"
-        >
+        <GoogleButton className="btn-google" fullWidth radius="xl">
           <Anchor<"a"> href={url} ta={"center"} size="sm" my={"sm"}>
             Daftar dengan Google
           </Anchor>
