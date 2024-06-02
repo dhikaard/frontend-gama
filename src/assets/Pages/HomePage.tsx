@@ -4,15 +4,11 @@ import {
   Group,
   Button,
   Flex,
-  Autocomplete,
   Container,
-  Title,
-  rem,
-  Input,
-  Alert,
-  Avatar,
   Text,
   Card,
+  Image,
+  Paper,
 } from "@mantine/core";
 import {
   IconMapPin,
@@ -20,8 +16,8 @@ import {
   IconPackage,
   IconNotebook,
   IconBottle,
-  IconPlus,
-  IconMinus,
+  IconRecycle,
+  IconExchange,
 } from "@tabler/icons-react";
 
 const dataLocal = [
@@ -146,13 +142,118 @@ function HomePage() {
       </Flex>
 
       <Container>
-        <Group>
-          <text size="md" mt="25rem" ml="16rem" px="9rem">
-            Layanan
-          </text>
+        <Group position="apart" mb="1rem">
+          <Text size="md">Layanan</Text>
+          <Button
+            variant="subtle"
+            style={{ color: "#416835" }}
+          >
+            Lihat Semua
+          </Button>
+        </Group>
+        <Group position="center" spacing="lg">
+          <Button
+            leftIcon={<IconRecycle stroke={2} />}
+            variant="subtle"
+            radius="md"
+            size="sm"
+            styles={{
+              root: {
+                backgroundColor: "#E6FCF5",
+                padding: "10px 20px",
+                borderRadius: "8px",
+                border: "1px solid #E6FCF5",
+              },
+              inner: {
+                display: "flex",
+                alignItems: "center",
+                color: "#228B22",
+              },
+              icon: {
+                marginRight: "8px",
+                color: "#228B22",
+              },
+            }}
+          >
+            Setor Sampah
+          </Button>
+          <Button
+            leftIcon={<IconExchange stroke={2} />}
+            variant="subtle"
+            radius="md"
+            size="sm"
+            styles={{
+              root: {
+                backgroundColor: "#E7F5FF",
+                padding: "10px 20px",
+                borderRadius: "8px",
+                border: "1px solid #E7F5FF",
+              },
+              inner: {
+                display: "flex",
+                alignItems: "center",
+                color: "#1E90FF",
+              },
+              icon: {
+                marginRight: "8px",
+                color: "#1E90FF",
+              },
+            }}
+          >
+            Penukaran
+          </Button>
         </Group>
       </Container>
 
+      <Container mt="2rem">
+        <Group position="apart" mb="1rem">
+          <Text size="md">Event</Text>
+          <Button
+            variant="subtle"
+            style={{ color: "#416835" }}
+          >
+            Lihat Semua
+          </Button>
+        </Group>
+        <Card shadow="sm" padding="lg" radius="md" withBorder>
+          <Image
+            src="" // 
+            height={160}
+            alt="Event"
+          />
+          <Text mt="md" size="sm" fw={500}>
+            #event
+          </Text>
+          <Text size="lg" fw={700}>
+            Preserving Natural Beauty for Future Generations!
+          </Text>
+          <Text size="sm" color="dimmed">
+            Semarang City
+          </Text>
+        </Card>
+      </Container>
+
+      <Container mt="2rem">
+        <Group position="apart" mb="1rem">
+          <Text size="md">Artikel</Text>
+          <Button
+            variant="subtle"
+            style={{ color: "#416835" }}
+          >
+            Lihat Semua
+          </Button>
+        </Group>
+        <Card shadow="sm" padding="lg" radius="md" withBorder>
+          <Image
+            src="path/to/article-image.jpg" 
+            height={160}
+            alt="Artikel"
+          />
+          <Text mt="md" size="lg" fw={700}>
+            Sampah botol di laut?
+          </Text>
+        </Card>
+      </Container>
     </div>
   );
 }
