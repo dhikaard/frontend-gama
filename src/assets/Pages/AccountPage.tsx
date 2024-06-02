@@ -9,17 +9,64 @@ import {
   rem,
   Text,
   Card,
-  Stack
+  Stack,
 } from "@mantine/core";
-function ExchangePage() {
 
+function AccountPage() {
   const [currentDate, setCurrentDate] = useState("");
+  const [profileData, setProfileData] = useState({
+    full_name: "",
+    address: "",
+    phone_number: "",
+    email: "",
+  });
 
   useEffect(() => {
     const today = new Date();
     const options = { day: "2-digit", month: "2-digit", year: "numeric" };
     setCurrentDate(today.toLocaleDateString("id-ID", options));
+
+    // Mengambil data profil dari API
+    fetch("http://127.0.0.1:8000/api/v1/profile")
+      .then((response) => response.json())
+      .then((data) => {
+        setProfileData({
+          full_name: data.full_name,
+          address: data.address,
+          phone_number: data.phone_number,
+          email: data.email,
+        });
+      })
+      .catch((error) => console.error("Error:", error));
   }, []);
+
+  // Fungsi untuk logout
+  const handleLogout = () => {
+    const token = localStorage.getItem("token");
+
+    // Memeriksa apakah token tersedia di local storage
+    if (token) {
+      fetch("http://127.0.0.1:8000/api/v1/auth/logout", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (response.ok) {
+            // Jika logout berhasil, hapus token dari local storage
+            localStorage.removeItem("token");
+            console.log("Logout berhasil");
+          } else {
+            console.error("Gagal logout");
+          }
+        })
+        .catch((error) => console.error("Error:", error));
+    } else {
+      console.error("Token tidak tersedia di local storage");
+    }
+  };
 
   return (
     <div className="penukaran-sampah">
@@ -36,7 +83,7 @@ function ExchangePage() {
                 Hai,
               </Text>
               <Text fw={700} size="lg" mb="sm">
-                Roger Dias
+                {profileData.full_name}
               </Text>
             </Flex>
             <Group justify="space-between" mb="0.25rem">
@@ -57,6 +104,7 @@ function ExchangePage() {
               </Flex>
             </Group>
           </Card.Section>
+
           <Card.Section className="text-card" color="#000">
             <Text size="md" px="1rem" py="1rem" fw={400}>
               {currentDate}
@@ -64,52 +112,53 @@ function ExchangePage() {
           </Card.Section>
         </Card>
         <Stack gap="xs">
-
-        <TextInput
-          size="md"
-          radius="md"
-          label="Nama Lengkap"
-          withAsterisk
-          value="Ardd"
-          disabled
-        />
-        <TextInput
-          size="md"
-          radius="md"
-          label="Alamat tempat tinggal"
-          withAsterisk
-          value="Jl. Candi Pawon"
-          disabled
-        />
-        <TextInput
-          size="md"
-          radius="md"
-          label="No. WhatsApp"
-          withAsterisk
-          value="08123456789"
-          disabled
-        />
-        <TextInput
-          size="md"
-          radius="md"
-          label="Email"
-          withAsterisk
-          value="email@email.com"
-          disabled
-        />
+          <TextInput
+            size="md"
+            radius="md"
+            label="Nama Lengkap"
+            withAsterisk
+            value={profileData.full_name}
+            disabled
+          />
+          <TextInput
+            size="md"
+            radius="md"
+            label="Alamat tempat tinggal"
+            withAsterisk
+            value={profileData.address}
+            disabled
+          />
+          <TextInput
+            size="md"
+            radius="md"
+            label="No. WhatsApp"
+            withAsterisk
+            value={profileData.phone_number}
+            disabled
+          />
+          <TextInput
+            size="md"
+            radius="md"
+            label="Email"
+            withAsterisk
+            value={profileData.email}
+            disabled
+          />
         </Stack>
-            <Flex mt="1.85rem">
-
-            <Button justify="left" variant="outline" color="#416835" size="md" radius="md">Keluar</Button>
-            </Flex>
-
-            <Flex >
-
-            </Flex>
-
+        <Flex mt="1.85rem">
+          <Button
+            justify="left"
+            variant="outline"
+            color="#416835"
+            size="md"
+            radius="md" // Memanggil fungsi logout saat tombol ditekan
+          >
+            Keluar
+          </Button>
+        </Flex>
       </Flex>
     </div>
   );
 }
 
-export default ExchangePage;
+export default AccountPage;

@@ -51,8 +51,14 @@ function ExchangePage() {
     const today = new Date();
     const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
     setCurrentDate(today.toLocaleDateString('id-ID', options));
-    setBankSampah(dataLocal);
+    fetch('http://127.0.0.1:8000/api/v1/waste-bank')
+    .then(response => response.json())
+    .then(data => setBankSampah(data))
+    .catch(error => console.error('Error:', error));
+
+      // Mengambil data dari API
   }, []);
+
 
   const produkData = [
     { nama: "Botol Plastik", logo: <IconBottle stroke={2} style={{ color: "#1971C2" }} />, bgColor: "#E7F5FF", point:"1000 Koin / ½ liter", counter: useCounter(0, { min: 0 }) },
@@ -90,8 +96,6 @@ function ExchangePage() {
         setErrors(newErrors);
       });
   };
-  
-  
 
   const IconMap = (
     <IconMapPin

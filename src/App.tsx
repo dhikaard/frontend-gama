@@ -29,6 +29,8 @@ function App() {
         <Route path="/daftar" element={<RegisterPage />} />
         <Route path="/masuk" element={<LoginPage />} />
         <Route path="/lupa-sandi" element={<ForgotPassword />} />
+
+        <Route path="/profile" element={<AccountPage />} />
         <Route path="/setor-sampah" element={<SetorSampahPages />} />
         <Route path="/konfirmasi" element={<ConfirmPage />} />
         <Route path="/konfirmasi-penukaran" element={<ConfirmPenukaranPage />} />

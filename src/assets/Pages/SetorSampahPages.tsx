@@ -189,8 +189,7 @@ function SetorSampahPages() {
             left={0}
             right={0}
             className="navigation"
-            mt="1rem"
-            style={{ zIndex: 10 }} // Menetapkan z-index di sini
+            style={{ zIndex: 10 }}
           >
             <Group
               grow
