@@ -22,9 +22,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 function RegisterPage() {
-  const [url, setUrl] = useState("");
-  const [error, setError] = useState("");
-
   const form = useForm({
     initialValues: {
       full_name: "",
@@ -42,32 +39,6 @@ function RegisterPage() {
       password: isNotEmpty(),
     },
   });
-
-  useEffect(() => {
-    axios
-      .get("http://127.0.0.1:8000/api/v1/auth")
-      .then((data) => {
-        setUrl(data.data.url);
-      });
-  }, []);
-
-  const navigate = useNavigate();
-  const handleSubmit = async (values) => {
-
-    try {
-      const response = await axios.post("http://127.0.0.1:8000/api/v1/auth/register", values);
-      console.log("Registrasi berhasil:", response.data);
-      navigate('/masuk');
-    } catch (error) {
-      if (error.response) {
-        setError(error.response.data.errors || "Registrasi gagal. Silakan coba lagi.");
-      } else if (error.request) {
-        setError("Tidak ada respon dari server. Silakan coba lagi.");
-      } else {
-        setError("Terjadi kesalahan dalam mengatur permintaan. Silakan coba lagi.");
-      }
-    }
-  };
 
   return (
     <div className="register">
@@ -89,31 +60,16 @@ function RegisterPage() {
         maw={340}
         mx="auto"
         className="form-register"
-        onSubmit={form.onSubmit(handleSubmit)}
+        onSubmit={form.onSubmit(() => {})}
       >
-        {error && (
-          <Alert
-            className="alert"
-            mb="sm"
-            variant="light"
-            color="red"
-            radius="md"
-            withCloseButton
-            title="Perhatian!"
-            icon={<IconAlertTriangle />}
-            onClose={() => setError("")}
-            lh="1rem"
-          >
-            {error.phone_number}
-          </Alert>
-        )}
+
         <TextInput
           className="register-input"
           label="Nama Lengkap"
           withAsterisk
           radius="xl"
-          placeholder="cth. Ferdyan Steevandio"
-          {...form.getInputProps("full_name")}
+          placeholder="cth. Ferdyan Steevandio"         
+          {...form.getInputProps("nama_lengkap")}
         />
 
         <TextInput
@@ -165,9 +121,7 @@ function RegisterPage() {
         <Divider label="atau" labelPosition="center" my="xs" />
 
         <GoogleButton className="btn-google" fullWidth radius="xl">
-          <Anchor<"a"> href={url} ta={"center"} size="sm" my={"sm"}>
-            Daftar dengan Google
-          </Anchor>
+          Daftar dengan Google
         </GoogleButton>
 
         <Group justify="center" align="center">
