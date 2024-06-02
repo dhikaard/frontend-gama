@@ -41,7 +41,7 @@ const ConfirmPenukaranPage = () => {
     <div className="confirm-page">
       <Container display="flex" bg="#F8F9FA" h="3.75rem" className="header">
         <Title order={6} ta="center" lh="1.125rem" fw={600}>
-          Konfirmasi
+          Konfirmasi Penukaran
         </Title>
       </Container>
       {isCloseAlert && (
@@ -70,10 +70,10 @@ const ConfirmPenukaranPage = () => {
           <Title size={"sm"} fw={600} mb="0.25rem" className="card-header">
             Bank Sampah Point
           </Title>
-          <Text size="sm" lh={"0.875rem"}>
+          <Text size="sm" lh={"1rem"}>
             Bank Sampah Candi Pawon
           </Text>
-          <Text size="sm" color="#868E96" lh="0.75rem">
+          <Text size="sm" color="#868E96" lh="1rem">
             Jl. Candi Pawon, Kota Semarang
           </Text>
         </Flex>
