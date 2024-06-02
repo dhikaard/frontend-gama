@@ -14,6 +14,7 @@ import HistoryPage from "./assets/Pages/HistoryPage";
 import DepositSetorSampahPage from "./assets/Pages/DepositSetorSampahPage";
 import DepositPenukaranPage from "./assets/Pages/DepositPenukaranPage";
 import ExchangePage from "./assets/Pages/ExchangePage";
+import GoogleCallback from "./assets/Pages/GoogleCallback";
 
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
         <Route path="/metode-setor" element={<DepositSetorSampahPage />} />
         <Route path="/metode-penukaran" element={<DepositPenukaranPage />} />
         <Route path="/penukaran" element={<ExchangePage />} />
-
+        <Route path="/daftar/google" element={<GoogleCallback/>} />
       </Routes>
     </MantineProvider>
   )

@@ -10,19 +10,17 @@ import {
   Divider,
   Anchor,
 } from "@mantine/core";
-import {
-  useForm,
-  isEmail,
-  isNotEmpty,
-  hasLength,
-} from "@mantine/form";
+import { useForm, isEmail, isNotEmpty, hasLength } from "@mantine/form";
 import LogoGama from "../img/logo.svg";
 import LogoGamaType from "../img/logotype.svg";
 
 // Import Icon
 import { GoogleButton } from "../Components/GoogleButton";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function RegisterPage() {
+  const [url, setUrl] = useState("");
   const form = useForm({
     initialValues: {
       nama_lengkap: "",
@@ -40,6 +38,14 @@ function RegisterPage() {
       password: isNotEmpty(),
     },
   });
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/api/v1/auth")
+      .then((data) => {
+        setUrl(data.data.url);
+      });
+  }, []);
 
   return (
     <div className="register">
@@ -64,13 +70,12 @@ function RegisterPage() {
         className="form-register"
         onSubmit={form.onSubmit(() => {})}
       >
-
         <TextInput
           className="register-input"
           label="Nama Lengkap"
           withAsterisk
           radius="xl"
-          placeholder="cth. Ferdyan Steevandio"         
+          placeholder="cth. Ferdyan Steevandio"
           {...form.getInputProps("nama_lengkap")}
         />
 
@@ -122,8 +127,14 @@ function RegisterPage() {
 
         <Divider label="atau" labelPosition="center" my="xs" />
 
-        <GoogleButton className="btn-google" fullWidth radius="xl">
-          Daftar dengan Google
+        <GoogleButton
+          className="btn-google"
+          fullWidth
+          radius="xl"
+        >
+          <Anchor<"a"> href={url} ta={"center"} size="sm" my={"sm"}>
+            Daftar dengan Google
+          </Anchor>
         </GoogleButton>
 
         <Group justify="center" align="center">
