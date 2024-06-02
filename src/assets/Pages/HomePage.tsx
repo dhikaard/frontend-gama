@@ -8,16 +8,16 @@ import {
   Text,
   Card,
   Image,
-  Paper,
 } from "@mantine/core";
 import {
-  IconMapPin,
-  IconInfoCircle,
   IconPackage,
   IconNotebook,
   IconBottle,
   IconRecycle,
   IconExchange,
+  IconHome,
+  IconHistory,
+  IconUser,
 } from "@tabler/icons-react";
 import Gambar1 from "../img/img.png";
 import Gambar2 from "../img/Image Item.png";
@@ -107,7 +107,7 @@ function HomePage() {
   return (
     <div className="home-page">
       <Flex className="main" direction="column" mt="1.5rem" mb="1.5rem">
-      <Card shadow="sm" padding="lg" radius="md" withBorder>
+        <Card shadow="sm" padding="lg" radius="md" withBorder>
           <Card.Section className="text-background">
             <Flex>
               <Text fw={500} size="lg" mr="0.5rem">
@@ -145,8 +145,8 @@ function HomePage() {
         <Group position="apart" mb="1rem" justify="space-between">
           <Text size="md">Layanan</Text>
           <Button
-          variant="subtle"
-          color="#416835"
+            variant="subtle"
+            color="#416835"
           >
             Lihat Semua
           </Button>
@@ -244,6 +244,59 @@ function HomePage() {
             Sampah botol di laut?
           </Text>
         </Card>
+      </Container>
+
+      {/* Navigation Buttons */}
+      <Container className="Navbutton">
+        <Flex
+          justify="space-around"
+          align="center"
+          style={{
+            position: "fixed",
+            bottom: 0,
+            width: "100%",
+            backgroundColor: "#fff",
+            padding: "10px 0",
+            boxShadow: "0 -2px 10px rgba(0, 0, 0, 0.1)",
+          }}
+        >
+          <Button
+            variant="subtle"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              color: "#416835",
+            }}
+          >
+            <IconHome size={24} />
+            <Text size="xs">Beranda</Text>
+          </Button>
+          <Button
+            variant="subtle"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              color: "#737373",
+            }}
+          >
+            <IconHistory size={24} />
+            <Text size="xs">Riwayat</Text>
+          </Button>
+          <Button
+            variant="subtle"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              color: "#737373",
+            }}
+          >
+            <IconUser size={24} />
+            <Text size="xs">Akun</Text>
+          </Button>
+        </Flex>
       </Container>
     </div>
   );

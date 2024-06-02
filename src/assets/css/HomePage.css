@@ -63,3 +63,8 @@
 .text-card {
   background-color: #F8F9FA;
 }
+
+.Navbutton {
+  max-width: 25.75rem;
+  margin: 0 1rem;
+}
