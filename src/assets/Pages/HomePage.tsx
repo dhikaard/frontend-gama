@@ -19,6 +19,10 @@ import {
   IconRecycle,
   IconExchange,
 } from "@tabler/icons-react";
+import Gambar1 from "../img/image 1.png";
+import Gambar2 from "../img/Image Item.png";
+
+
 
 const dataLocal = [
   {
@@ -215,7 +219,7 @@ function HomePage() {
         </Group>
         <Card shadow="sm" padding="lg" radius="md" withBorder>
           <Image
-            src="" // 
+            src={Gambar1}
             height={160}
             alt="Event"
           />
@@ -243,7 +247,7 @@ function HomePage() {
         </Group>
         <Card shadow="sm" padding="lg" radius="md" withBorder>
           <Image
-            src="path/to/article-image.jpg" 
+            src={Gambar2}
             height={160}
             alt="Artikel"
           />
