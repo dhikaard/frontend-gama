@@ -1,4 +1,6 @@
 import {
+  Alert,
+  Button,
   Card,
   Center,
   Container,
@@ -9,26 +11,54 @@ import {
   Text,
   Title,
   Transition,
-  Timeline,
-  rem,
+  Flex
 } from "@mantine/core";
 import Barcode from "react-barcode";
+import { IconExclamationCircle } from "@tabler/icons-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import "./../img/Vector.png";
+import { useNavigate } from 'react-router-dom';
 import { useClickOutside } from "@mantine/hooks";
 
-const Historypage = () => {
+const ConfirmPenukaranPage = () => {
+  const navigate = useNavigate();
+
+  const icon = <IconExclamationCircle />;
+  const [isCloseAlert, setIsCloseAlert] = useState(true);
   const [isSubmited, setIsSubmited] = useState(false);
   const ref = useClickOutside(() => setIsSubmited(false));
 
+  const handleClickSubmit = () => {
+    setIsSubmited(true);
+  };
+
+  const handleClickClosePopUp = () => {
+    setIsSubmited(false);
+  };
 
   return (
     <div className="confirm-page">
       <Container display="flex" bg="#F8F9FA" h="3.75rem" className="header">
         <Title order={6} ta="center" lh="1.125rem" fw={600}>
-        23CODE-KM
+          Konfirmasi Penukaran
         </Title>
       </Container>
+      {isCloseAlert && (
+        <Alert
+          variant="light"
+          color="blue"
+          title="Perhatian!"
+          withCloseButton
+          className="alert-info"
+          icon={icon}
+          onClick={() => {setIsCloseAlert(false)}}
+          lh="1rem"
+        >
+          Pastikan semua informasi sudah benar dan lengkap. Anda tidak dapat
+          kembali ke halaman ini setelah menekan tombol "Ajukan".
+        </Alert>
+      )}
       <Card
         shadow="sm"
         padding={"lg"}
@@ -36,45 +66,45 @@ const Historypage = () => {
         withBorder
         className="card"
       >
-        <Stack>
-          <Title size={"sm"} fw={600} className="card-header">
+        <Flex direction="column">
+          <Title size={"sm"} fw={600} mb="0.25rem" className="card-header">
             Bank Sampah Point
           </Title>
-          <Text size="sm" lh={"4px"}>
+          <Text size="sm" lh={"1rem"}>
             Bank Sampah Candi Pawon
           </Text>
-          <Text size="sm" color="#495057">
+          <Text size="sm" color="#868E96" lh="1rem">
             Jl. Candi Pawon, Kota Semarang
           </Text>
-        </Stack>
+        </Flex>
         <Stack mt={"16px"}>
           <Title size={"sm"} fw={600} className="card-header">
-            Jenis Sampah
+            Jenis Barang
           </Title>
           <Group justify="space-between">
             <Text size="sm" lh={"4px"}>
-              Botol Plastik
+              Minyak 1/2 liter
             </Text>
             <Group>
               <Text size="sm" lh={"4px"}>
-                12
+                2
               </Text>
-              <Text size="sm" lh={"4px"} color="#495057">
-                kg
+              <Text size="sm" lh={"4px"} color="#868E96">
+                Pcs
               </Text>
             </Group>
           </Group>
           <Divider />
           <Group justify="space-between">
             <Text size="sm" lh={"4px"}>
-              Botol Plastik
+              Beras
             </Text>
             <Group>
               <Text size="sm" lh={"4px"}>
-                12
+                1
               </Text>
-              <Text size="sm" lh={"4px"} color="#495057">
-                kg
+              <Text size="sm" lh={"4px"} color="#868E96">
+                Pcs
               </Text>
             </Group>
           </Group>
@@ -82,37 +112,37 @@ const Historypage = () => {
         </Stack>
         <Stack mt={"16px"}>
           <Title size={"sm"} fw={600} className="card-header">
-            Bank Sampah Point
+            Metode Penukaran
           </Title>
-          <Text size="sm" lh={"3px"}>
-            Antar Sendiri
+          <Text size="sm" lh={"0.875rem"}>
+            Ambil Sendiri
           </Text>
-          <Text size="sm" color="#495057">
+          <Text size="sm" color="#495057" >
             Akan tiba di bank sampah point pada tanggal 02/03/2024 - Jam 13:00
             WIB.
           </Text>
         </Stack>
         <Stack mt={"16px"}>
           <Title size={"sm"} fw={600} className="card-header">
-            Jenis Sampah
+            Koin  
           </Title>
           <Group justify="space-between">
             <Text size="sm" lh={"4px"}>
-              Botol Plastik
+              Minyak 1/2 liter
             </Text>
             <Group>
               <Text size="sm" lh={"4px"}>
-                12
+                1
               </Text>
-              <Text size="sm" lh={"4px"} color="#495057">
-                kg
+              <Text size="sm" lh={"4px"} color="#868E96">
+                Pcs
               </Text>
             </Group>
             <Group>
               <Text size="sm" lh={"4px"}>
-                12
+                -1
               </Text>
-              <Text size="sm" lh={"4px"} color="#495057">
+              <Text size="sm" lh={"4px"} color="#868E96">
                 Koin
               </Text>
             </Group>
@@ -120,21 +150,21 @@ const Historypage = () => {
           <Divider />
           <Group justify="space-between">
             <Text size="sm" lh={"4px"}>
-              Botol Plastik
+              Minyak 1/2 liter
             </Text>
             <Group>
               <Text size="sm" lh={"4px"}>
-                12
+                1
               </Text>
-              <Text size="sm" lh={"4px"} color="#495057">
-                kg
+              <Text size="sm" lh={"4px"} color="#868E96">
+                Pcs
               </Text>
             </Group>
             <Group>
               <Text size="sm" lh={"4px"}>
-                12
+                -1
               </Text>
-              <Text size="sm" lh={"4px"} color="#495057">
+              <Text size="sm" lh={"4px"} color="#868E96">
                 Koin
               </Text>
             </Group>
@@ -142,13 +172,13 @@ const Historypage = () => {
           <Divider />
           <Group justify="space-between">
             <Text size="sm" lh={"4px"}>
-              Botol Plastik
+              Total
             </Text>
             <Group>
               <Text size="sm" lh={"4px"}>
-                12
+                -12
               </Text>
-              <Text size="sm" lh={"4px"} color="#495057">
+              <Text size="sm" lh={"4px"} color="#868E96">
                 Koin
               </Text>
             </Group>
@@ -168,7 +198,31 @@ const Historypage = () => {
         mt={"32px"}
         pb={"54px"}
       >
-
+        <Button
+          className="NavigationBtn"
+          variant="outline"
+          color="#416835"
+          radius="md"
+          size="md"
+          w="8rem"
+          fullWidth
+        >
+          <Link to={"/"} style={{ color: "#416835" }}>
+            Kembali
+          </Link>
+        </Button>
+        <Button
+          className="NavigationBtn"
+          variant="filled"
+          color="#416835"
+          radius="md"
+          size="md"
+          w="8rem"
+          fullWidth
+          onClick={handleClickSubmit}
+        >
+          Ajukan
+        </Button>
       </Group>
       <Transition
         mounted={isSubmited}
@@ -231,35 +285,36 @@ const Historypage = () => {
               mr={"1rem"}
               mt={"106px"}
             >
-              
-             
+              <Button
+                className="NavigationBtn"
+                variant="outline"
+                color="#416835"
+                radius="md"
+                size="md"
+                w="8rem"
+                fullWidth
+                onClick={handleClickClosePopUp}
+              >
+                Kembali
+              </Button>
+              <Button
+                className="NavigationBtn"
+                variant="filled"
+                color="#416835"
+                radius="md"
+                size="md"
+                w="8rem"
+                fullWidth
+                onClick={() => navigate("/konfirmasi-penukaran")}
+              >
+                Ajukan
+              </Button>
             </Group>
           </Container>
         )}
       </Transition>
-
-      <Container className="timeline">  
-      <text >
-          status pengajuam
-      </text>
-     
-      <Timeline radius="lg" active={2} bulletSize={25}>
-        <Timeline.Item title="Pengajuan terkirim.">
-          <Text c="dimmed" size="sm">
-          Anda berhasil mengirim pengajuan setor sampah pada bank sampah X. <br />
-           <span className="waktu">11:34 WIB, 02/03/2024</span>
-          </Text>
-        </Timeline.Item>
-        <Timeline.Item title="Menunggu konfirmasi." >
-          <Text c="dimmed" size="sm">
-          Tunggu petugas bank sampah untuk mengonfirmasi pengajuan Anda.
-          </Text>
-        </Timeline.Item>
-      </Timeline>
-      </Container>
     </div>
   );
 };
 
-export default Historypage;
-
+export default ConfirmPenukaranPage;

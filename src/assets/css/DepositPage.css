@@ -1,0 +1,59 @@
+.setor-sampah {
+    margin: auto;
+    max-width: 25.75rem;
+    height: 100vh;
+}
+
+.setor-sampah .header {
+    align-items: center;
+    justify-content: center;
+}
+
+.setor-sampah .main {
+    margin: 0 1rem;
+}
+
+.setor-sampah .main .mantine-Input-input {
+    border-radius: var(--Dimensions-Corner-Radius-xl, 0.5rem);
+    border: 1px solid var(--Gray-Gray-4, #CED4DA);
+}
+
+.setor-sampah .main .InputSampah {
+    gap: 0.25rem;
+}
+ 
+.mantine-Alert-label {
+    font-weight: 600;
+}
+
+.setor-sampah .main .label .alert .mantine-Alert-message {
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1rem;
+    color: var(--Dark-Dark-6, #25262B);
+}
+
+.setor-sampah .main .navigation {
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+}
+
+.setor-sampah .main .item-sampah {
+    border-radius: var(--Dimensions-Corner-Radius-xl, 0.5rem);
+    border: 1px solid var(--gray-4, #CED4DA);
+    padding: var(--Dimensions-Spacing-sm, 0.5rem) 0.75rem;
+}
+
+.icon_package{
+    color: black;
+}
+
+
+@media screen and (min-width: 425px) {
+    .setor-sampah .main .navigation .NavigationGroup {
+        flex-direction: row;
+
+    }
+
+}

@@ -1,49 +1,66 @@
-import { Autocomplete, Group, Burger, rem } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
-import { IconSearch } from '@tabler/icons-react';
-import classes from '../css/HomePage.module.css';
+import React from 'react'
+import { useState, useEffect } from "react";
+import { useCounter } from "@mantine/hooks";
+import {
+  Group,
+  Button,
+  Flex,
+  Autocomplete,
+  Container,
+  Title,
+  rem,
+  Input,
+  Alert,
+  Avatar,
+  Card,
+  Text,
+} from "@mantine/core";
 
-const links = [
-  { link: '/about', label: 'Features' },
-  { link: '/pricing', label: 'Pricing' },
-  { link: '/learn', label: 'Learn' },
-  { link: '/community', label: 'Community' },
-];
-
-export function HomePage() {
-  const [opened, { toggle }] = useDisclosure(false);
-
-  const items = links.map((link) => (
-    <a
-      key={link.label}
-      href={link.link}
-      className={classes.link}
-      onClick={(event) => event.preventDefault()}
-    >
-      {link.label}
-    </a>
-  ));
-
+const HomePage = () => {
+  
+  
+  const [currentDate, setCurrentDate] = useState("");
+  useEffect(() => {
+    const today = new Date();
+    const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    setCurrentDate(today.toLocaleDateString('id-ID', options));
+  }, []);
   return (
-    <header className={classes.header}>
-      <div className={classes.inner}>
-        <Group>
-          <Burger opened={opened} onClick={toggle} size="sm" hiddenFrom="sm" />
-        </Group>
-
-        <Group>
-          <Group ml={50} gap={5} className={classes.links} visibleFrom="sm">
-            {items}
-          </Group>
-          <Autocomplete
-            className={classes.search}
-            placeholder="Search"
-            leftSection={<IconSearch style={{ width: rem(16), height: rem(16) }} stroke={1.5} />}
-            data={['React', 'Angular', 'Vue', 'Next.js', 'Riot.js', 'Svelte', 'Blitz.js']}
-            visibleFrom="xs"
-          />
-        </Group>
-      </div>
-    </header>
-  );
+    <div>
+<Card shadow="sm" padding="lg" radius="md" mb="0.75rem" withBorder>
+          <Card.Section className="text-background">
+            <Flex>
+              <Text fw={500} size="lg" mr="0.5rem">
+                Hai,
+              </Text>
+              <Text fw={700} size="lg" mb="sm">Roger Dias</Text>
+            </Flex>
+            <Group justify="space-between" mb="0.25rem">
+              <Flex align="center">
+                <Text size="1.5rem" fw={600} lh="120%" mr="8px">
+                  1000
+                </Text>
+                <Text size="md">Koin</Text>
+              </Flex>
+              <Text size="1.5rem" fw={600} lh="120%" mr="8px">
+                =
+              </Text>
+              <Flex align="center">
+                <Text size="1.5rem" fw={600} lh="120%" mr="8px">
+                  100.000
+                </Text>
+                <Text size="md">IDR</Text>
+              </Flex>
+            </Group>
+          </Card.Section>
+          <Card.Section className="text-card" color="#000">
+            <Text size="md" px="1rem" py="1rem" fw={400}>
+              {currentDate}
+            </Text>
+          </Card.Section>
+        </Card>
+    </div>
+  )
 }
+
+export default HomePage

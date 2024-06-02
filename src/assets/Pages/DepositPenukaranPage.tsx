@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { useCounter } from '@mantine/hooks';
-import { DateTimePicker } from '@mantine/dates';
+import { DateTimePicker } from "@mantine/dates";
 import {
   Group,
   Button,
@@ -21,21 +20,73 @@ import {
   IconPackage,
   IconNotebook,
   IconBottle,
-  IconPlus,
-  IconMinus
+  IconAlertTriangle
 } from "@tabler/icons-react";
+import { useNavigate } from 'react-router-dom';
+import * as Yup from 'yup';
+
 
 const dataLocal = [
-  { bank_sampah: "Bank Sampah 1", item_sampah: "bottle ,cardboard, paper", location: "Suite 55" },
-  { bank_sampah: "Bank Sampah 2", item_sampah: "paper, bottle", location: "PO Box 41613" },
-  { bank_sampah: "Bank Sampah 3", item_sampah: "bottle", location: "PO Box 50058" },
+  {
+    bank_sampah: "Bank Sampah 1",
+    item_sampah: "bottle ,cardboard, paper",
+    location: "Suite 55",
+  },
+  {
+    bank_sampah: "Bank Sampah 2",
+    item_sampah: "paper, bottle",
+    location: "PO Box 41613",
+  },
+  {
+    bank_sampah: "Bank Sampah 3",
+    item_sampah: "bottle",
+    location: "PO Box 50058",
+  },
   { bank_sampah: "Bank Sampah 4", item_sampah: "paper", location: "8th Floor" },
-  { bank_sampah: "Bank Sampah 5", item_sampah: "paper, cardboard", location: "PO Box 57936" },
+  {
+    bank_sampah: "Bank Sampah 5",
+    item_sampah: "paper, cardboard",
+    location: "PO Box 57936",
+  },
 ];
 
-function DepositSetorSampahPage() {
-  const [value, setValue] = useState<Date | null>(null);
-  const icon = <IconCalendar style={{ width: rem(18), height: rem(18) }} stroke={1.5} />;
+
+
+
+function DepositPenukaranPage() {
+  const navigate = useNavigate();
+  
+  const [ambilSendiri, setAmbilSendiri] = useState<any[]>([]);
+  const [selectedBankSampah, setSelectedBankSampah] = useState("");
+  const [showAlertBankSampahPoint, setShowAlertBankSampahPoint] = useState(false);
+  const [bankSampah, setBankSampah] = useState<any[]>([]);
+  const [searchValue, setSearchValue] = useState("");
+
+
+
+  const validationSchema = Yup.object().shape({
+    ambilSendiri: Yup.date().required('Silahkan memilih tanggal dan jam').nullable(),
+  });
+
+  
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+  
+    const values = { bankSampah: selectedBankSampah };
+    validationSchema.validate(values).then(() => {
+      navigate('/konfirmasi-penukaran');
+    }).catch((error) => {
+      setShowAlertBankSampahPoint(true);
+    });
+  };
+
+  useEffect(() => {
+    setAmbilSendiri(dataLocal);
+  }, []);
+
+  const IconCalendarInput = (
+    <IconCalendar style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
+  );
 
   const IconMap = (
     <IconMapPin
@@ -43,6 +94,7 @@ function DepositSetorSampahPage() {
       style={{ width: rem("1.25rem"), height: rem("1.25rem") }}
     />
   );
+
   const IconInfo = (
     <IconInfoCircle
       stroke={2}
@@ -50,30 +102,7 @@ function DepositSetorSampahPage() {
     />
   );
 
-  const BottleIcon =(
-    <IconBottle
-      stroke={2}
-      style={{ color: "#1971C2"}}
-    />
-  );
-  const PackageIcon =(
-    <IconPackage
-      stroke={2}
-      style={{ color : "#7950F2"}}
-    />
-  );
-  const PaperIcon =(
-    <IconNotebook
-      stroke={2}
-      style={{ color : "#373A40" }}
-    />
-  );
 
-  const PlusIcon = <IconPlus stroke={2} style={{ width: rem("1.25rem"), height: rem("1.25rem") }} />;
-  const MinusIcon = <IconMinus stroke={2} style={{ width: rem("1.25rem"), height: rem("1.25rem") }} />;
-
-  const [bankSampah, setBankSampah] = useState<any[]>([]);
-  const [searchValue, setSearchValue] = useState("");
 
   // handleClose Allert
   const [showAlert, setShowAlert] = useState(true);
@@ -82,68 +111,86 @@ function DepositSetorSampahPage() {
   // Fetch nama bank sampah dari data local
   useEffect(() => {
     setBankSampah(dataLocal);
-  },[]);
+  }, []);
 
   // Fungsi untuk melakukan pencarian
-  const filteredBankSampah = bankSampah.map((item) => item.bank_sampah).filter((item) =>
-    item.toLowerCase().includes(searchValue.toLowerCase())
-  );
-
-  const produkData = [
-    { nama: "Botol Plastik", logo: BottleIcon, bgColor: "#E7F5FF", counter: useCounter(0) },
-    { nama: "Kardus", logo: PackageIcon,  bgColor: "#F3F0FF", counter: useCounter(0)  },
-    { nama: "Kertas", logo: PaperIcon,  bgColor: "#F1F3F5", counter: useCounter(0) },
-  ];
+  const filteredBankSampah = bankSampah
+    .map((item) => item.bank_sampah)
+    .filter((item) => item.toLowerCase().includes(searchValue.toLowerCase()));
 
   return (
     <div className="setor-sampah">
       <Container display="flex" bg="#F8F9FA" h="3.75rem" className="header">
         <Title order={6} ta="center" lh="1.125rem" fw={600}>
-          Metode Setor 
+          Metode Setor
         </Title>
       </Container>
       <Flex className="main" direction="column" mt="1.5rem" mb="5rem">
-      <DateTimePicker
-      label="Pick date and time"
-      placeholder="Pick date and time"
-    />
+      <form onSubmit={handleSubmit}>
+      {showAlertBankSampahPoint && (
+            <Alert
+              className="alert"
+              mb="sm"
+              variant="light"
+              color="red"
+              radius="md"
+              withCloseButton
+              title="Perhatian!"
+              icon={<IconAlertTriangle />}
+              onClose={() => setShowAlertBankSampahPoint(false)}
+              lh="1rem"
+              
+            >
+              Silahkan untuk memilih tanggal dan jam terlebih dahulu.
+            </Alert>
+          )}
+        <DateTimePicker
+          rightSection={IconCalendarInput}
+          rightSectionPointerEvents="none"
+          label="Ambil sendiri"
+          description="Masukkan tanggal dan jam saat menyetorkan sampah."
+          withAsterisk
+          onChange={(value) => {
+            setSelectedBankSampah(value);
+          }}
+          error={showAlertBankSampahPoint}
+          styles={{
+            input: {
+              borderColor: showAlertBankSampahPoint ? 'red' : undefined,
+              '&:focus': {
+                borderColor: showAlertBankSampahPoint ? 'red' : undefined,
+              },
+            },
+          }}
+        />
+
+        {showAlert && (
+          <Alert
+            className="alert"
+            my="xs"
+            variant="light"
+            color="blue"
+            radius="md"
+            withCloseButton
+            title="Perhatian!"
+            icon={IconInfo}
+            onClose={handleCloseAlert}
+            lh="1rem"
+          >
+            Layanan antar ke rumah belum tersedia di bank sampah ini.
+          </Alert>
+        )}
 
         <Autocomplete
           className="InputSampah"
-          label="Bank sampah point"
-          description="Pilih bank sampah tujuan Anda."
-          data={filteredBankSampah}
-          value={searchValue}
-          onChange={setSearchValue}
+          disabled
+          label="Antar ke rumah"
+          description="Masukkan alamat rumah Anda."
           rightSectionPointerEvents="none"
           rightSection={IconMap}
           comboboxProps={{ shadow: "md" }}
           withAsterisk
         />
-
-        <Flex className="label" mt="sm" direction="column">
-          <Input.Label required>Jenis sampah</Input.Label>
-          <Input.Description fz="sm" fw={400}>
-            Pilih jenis sampah yang akan disetorkan.
-          </Input.Description>
-
-          {showAlert && (
-            <Alert
-              className="alert"
-              mt="sm"
-              variant="light"
-              color="blue"
-              radius="md"
-              withCloseButton
-              title="Perhatian!"
-              icon={IconInfo}
-              onClose={handleCloseAlert}
-            >
-              Jenis sampah yang dapat disetorkan ke bank sampah terbatas,
-              tergantung pada kebijakan masing-masing bank sampah.
-            </Alert>
-          )}
-        </Flex>
 
         <Container
           bg="white"
@@ -154,7 +201,7 @@ function DepositSetorSampahPage() {
           right={0}
           className="navigation"
           mt="1rem"
-          style={{ zIndex: 10 }} // Menetapkan z-index di sini
+          style={{ zIndex: 10 }}
         >
           <Group
             grow
@@ -171,10 +218,11 @@ function DepositSetorSampahPage() {
               size="md"
               w="8rem"
               fullWidth
-            >
+              >
               Kembali
             </Button>
             <Button
+              type="submit"
               className="NavigationBtn"
               variant="filled"
               color="#416835"
@@ -187,44 +235,10 @@ function DepositSetorSampahPage() {
             </Button>
           </Group>
         </Container>
-
-        {produkData.map((produk, index) => (
-          <Flex className="item-sampah" direction="row" align="center" justify="space-between" key={index} mt="sm">
-            <Flex className="logo" gap={20}>
-              <Avatar variant="defalut" radius="md" size="lg" bg={produk.bgColor}>{produk.logo}</Avatar>
-              <Flex direction="column" justify="center" gap={6}>
-                <Text fw={600}>{produk.nama}</Text>
-                <Text size="sm" color="#868E96">
-                  2 Koin / pcs
-                </Text>
-              </Flex>
-            </Flex>
-            <Flex className="count-item" align="center">
-              <Button
-                onClick={produk.counter[1].decrement}
-                size="xs"
-                variant="transparent"
-                color="gray"
-                p="0"
-              >
-                {MinusIcon}
-              </Button>
-              <Title ta="center" size="sm" fw={400} px="0.5rem">{produk.counter[0]}<Text pl="0.5rem" span c="#868E96">Kg</Text></Title>
-              <Button
-                onClick={produk.counter[1].increment}
-                size="xs"
-                variant="transparent"
-                color="gray"
-                p="0"
-              >
-                {PlusIcon}
-              </Button>
-            </Flex>
-          </Flex>
-        ))}
+      </form>
       </Flex>
     </div>
   );
 }
 
-export default DepositSetorSampahPage;
+export default DepositPenukaranPage;
