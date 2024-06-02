@@ -55,7 +55,6 @@ function AccountPage() {
       })
         .then((response) => {
           if (response.ok) {
-            // Jika logout berhasil, hapus token dari local storage
             localStorage.removeItem("token");
             console.log("Logout berhasil");
           } else {
@@ -151,7 +150,8 @@ function AccountPage() {
             variant="outline"
             color="#416835"
             size="md"
-            radius="md" // Memanggil fungsi logout saat tombol ditekan
+            radius="md"
+            onChange={handleLogout}
           >
             Keluar
           </Button>
