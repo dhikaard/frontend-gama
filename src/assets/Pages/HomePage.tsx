@@ -103,22 +103,20 @@ function HomePage() {
   ];
 
   return (
-    <div className="penukaran-sampah">
-      <Flex className="main" direction="column" mt="1.5rem" mb="5rem">
-        <Card shadow="sm" padding="lg" radius="md" mb="0.75rem" withBorder>
+    <div className="home-page">
+      <Flex className="main" direction="column" mt="1.5rem" mb="1.5rem">
+      <Card shadow="sm" padding="lg" radius="md" withBorder>
           <Card.Section className="text-background">
             <Flex>
               <Text fw={500} size="lg" mr="0.5rem">
                 Hai,
               </Text>
-              <Text fw={700} size="lg" mb="sm">
-                Roger Dias
-              </Text>
+              <Text fw={700} size="lg" mb="sm">Roger Dias</Text>
             </Flex>
             <Group justify="space-between" mb="0.25rem">
               <Flex align="center">
                 <Text size="1.5rem" fw={600} lh="120%" mr="8px">
-                  0
+                  1000
                 </Text>
                 <Text size="md">Koin</Text>
               </Flex>
@@ -127,7 +125,7 @@ function HomePage() {
               </Text>
               <Flex align="center">
                 <Text size="1.5rem" fw={600} lh="120%" mr="8px">
-                  0
+                  100.000
                 </Text>
                 <Text size="md">IDR</Text>
               </Flex>
@@ -142,11 +140,11 @@ function HomePage() {
       </Flex>
 
       <Container>
-        <Group position="apart" mb="1rem">
+        <Group position="apart" mb="1rem" justify="space-between">
           <Text size="md">Layanan</Text>
           <Button
-            variant="subtle"
-            style={{ color: "#416835" }}
+          variant="subtle"
+          color="#416835"
           >
             Lihat Semua
           </Button>

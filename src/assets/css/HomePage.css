@@ -1,40 +1,36 @@
-.penukaran-sampah {
+.home-page {
   margin: auto;
   max-width: 25.75rem;
 }
 
-.penukaran-sampah .header {
-  align-items: center;
-  justify-content: center;
-}
 
-.penukaran-sampah .main {
+.home-page .main {
   margin: 0 1rem;
 }
 
-.penukaran-sampah .main .mantine-Input-input {
+.home-page .main .mantine-Input-input {
   border-radius: var(--Dimensions-Corner-Radius-xl, 0.5rem);
   border: 1px solid var(--Gray-Gray-4, #CED4DA);
 }
 
-.penukaran-sampah .main .InputSampah {
+.home-page .main .InputSampah {
   gap: 0.25rem;
 }
 
-.penukaran-sampah .main .label .alert .mantine-Alert-message {
+.home-page .main .label .alert .mantine-Alert-message {
   font-weight: 400;
   font-size: 0.875rem;
   line-height: 1rem;
   color: var(--Dark-Dark-6, #25262B);
 }
 
-.penukaran-sampah .main .navigation {
+.home-page .main .navigation {
   position: fixed;
   align-items: center;
   justify-content: center;
 }
 
-.penukaran-sampah .main .item-sampah {
+.home-page .main .item-sampah {
   border-radius: var(--Dimensions-Corner-Radius-xl, 0.5rem);
   border: 1px solid var(--gray-4, #CED4DA);
   padding: var(--Dimensions-Spacing-sm, 0.5rem) 0.75rem;
