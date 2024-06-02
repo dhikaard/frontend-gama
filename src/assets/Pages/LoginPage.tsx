@@ -9,14 +9,11 @@ import {
   PasswordInput,
   Divider,
   Anchor,
+  Alert,
 } from "@mantine/core";
-import {
-  useForm,
-  isEmail,
-  isNotEmpty,
-  hasLength,
-  matchesField,
-} from "@mantine/form";
+import { IconAlertTriangle } from "@tabler/icons-react";
+import { useForm, isEmail, isNotEmpty } from "@mantine/form";
+import { useNavigate } from "react-router-dom";
 import LogoGama from "../img/logo.svg";
 import LogoGamaType from "../img/logotype.svg";
 
@@ -27,31 +24,51 @@ import axios from "axios";
 
 function LoginPage() {
   const [url, setUrl] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
   const form = useForm({
     initialValues: {
-      username: "",
+      login: "",
       password: "",
     },
-
     validate: {
-      username: hasLength({ min: 5 }),
+      login: isEmail(),
       password: isNotEmpty(),
     },
   });
 
   useEffect(() => {
-    axios
-      .get("http://127.0.0.1:8000/api/v1/auth")
-      .then((data) => {
-        setUrl(data.data.url);
-      });
+    axios.get("http://127.0.0.1:8000/api/v1/auth").then((data) => {
+      setUrl(data.data.url);
+    });
   }, []);
+
+  const handleSubmit = async (values) => {
+    console.log("Submitting form with values:", values); // Debugging log
+    try {
+      const response = await axios.post("http://127.0.0.1:8000/api/v1/auth/login", {
+        login: values.login,
+        password: values.password,
+      });
+
+      console.log("Login berhasil:", response.data);
+      
+      // Simpan token ke localStorage
+      localStorage.setItem('token', response.data.token);
+
+      // Navigasi ke halaman beranda setelah login berhasil
+      navigate('/');
+    } catch (err) {
+      console.log("Error response:", err.response); // Debugging log
+      setError("Sepertinya ada yang salah. Silakan coba lagi.");
+    }
+  };
 
   return (
     <div className="register">
       <Flex className="register-hero" direction="column" align="center">
         <img src={LogoGama} alt="Logo Gama" className="gama-register" />
-        <img src={LogoGamaType} alt="Gama" />
       </Flex>
 
       <Flex my="1.5rem" direction="column" gap="8" align="center">
@@ -69,17 +86,38 @@ function LoginPage() {
         maw={340}
         mx="auto"
         className="form-register"
-        onSubmit={form.onSubmit(() => {})}
+        onSubmit={form.onSubmit(handleSubmit)}
       >
+        {error && (
+          <Alert
+            className="alert"
+            mb="sm"
+            variant="light"
+            color="red"
+            radius="md"
+            withCloseButton
+            title="Perhatian!"
+            icon={<IconAlertTriangle />}
+            onClose={() => setError("")}
+            lh="1rem"
+          >
+            {error}
+          </Alert>
+        )}
+
         <TextInput
           className="register-input"
+          label="Email"
+          withAsterisk
           mt="0.56rem"
           radius="xl"
-          placeholder="Username"
-          {...form.getInputProps("username")}
+          placeholder="email"
+          {...form.getInputProps("login")}
         />
 
         <PasswordInput
+          label="Password"
+          withAsterisk
           className="register-input"
           mt="0.56rem"
           radius="xl"
@@ -116,7 +154,7 @@ function LoginPage() {
         <Group justify="center" align="center">
           <Text className="daftar-register" ta="center" size="xs" my="sm">
             Belum punya akun?{" "}
-            <Anchor<"a"> href="/masuk" fw={500} underline="never">
+            <Anchor<"a"> href="/daftar" fw={500} underline="never">
               Daftar sebagai Pengguna
             </Anchor>
           </Text>
