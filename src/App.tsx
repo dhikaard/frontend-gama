@@ -15,6 +15,7 @@ import HistoryPage from "./assets/Pages/HistoryPage";
 import DepositSetorSampahPage from "./assets/Pages/DepositSetorSampahPage";
 import DepositPenukaranPage from "./assets/Pages/DepositPenukaranPage";
 import ExchangePage from "./assets/Pages/ExchangePage";
+import Historypage1 from "./assets/Pages/HistoryPage1";
 
 
 function App() {
