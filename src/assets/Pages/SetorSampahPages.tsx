@@ -16,6 +16,7 @@ import {
 import { IconMapPin, IconInfoCircle, IconPackage, IconNotebook, IconBottle, IconPlus, IconMinus } from "@tabler/icons-react";
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
+import axios from "axios";
 
 const dataLocal = [
   { bank_sampah: "Bank Sampah 1", item_sampah: "bottle ,cardboard, paper", location: "Suite 55" },
@@ -46,9 +47,19 @@ function SetorSampahPages() {
   const [showAlert, setShowAlert] = useState(true);
   const [showAlertBankSampahPoint, setShowAlertBankSampahPoint] = useState(false);
 
+  const token = localStorage.getItem('token');
+  
   useEffect(() => {
-    setBankSampah(dataLocal);
-  }, []);
+    axios.get('https://admin.gama.fr.to/api/v1/waste-bank', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then(data => {
+      setBankSampah(data.data.data)
+      console.log(data.data.data);
+    })
+    .catch(err => console.log(err));
+  });
 
   const filteredBankSampah = bankSampah.map((item) => item.bank_sampah).filter((item) =>
     item.toLowerCase().includes(searchValue.toLowerCase())

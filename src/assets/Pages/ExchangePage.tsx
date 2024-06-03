@@ -17,6 +17,7 @@ import {
 import { IconMapPin, IconInfoCircle, IconAlertTriangle, IconPackage, IconNotebook, IconBottle, IconPlus, IconMinus } from "@tabler/icons-react";
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
+import axios from "axios";
 
 const dataLocal = [
   { bank_sampah: "Bank Sampah 1", item_sampah: "bottle ,cardboard, paper", location: "Suite 55" },
@@ -51,20 +52,9 @@ function ExchangePage() {
     const today = new Date();
     const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
     setCurrentDate(today.toLocaleDateString('id-ID', options));
-    fetch('http://127.0.0.1:8000/api/v1/waste-bank')
-    .then(response => response.json())
-    .then(data => setBankSampah(data))
-    .catch(error => console.error('Error:', error));
-
-      // Mengambil data dari API
+    const token = localStorage.getItem('token');
   }, []);
 
-
-  const produkData = [
-    { nama: "Botol Plastik", logo: <IconBottle stroke={2} style={{ color: "#1971C2" }} />, bgColor: "#E7F5FF", point:"1000 Koin / ½ liter", counter: useCounter(0, { min: 0 }) },
-    { nama: "Kardus", logo: <IconPackage stroke={2} style={{ color: "#7950F2" }} />, bgColor: "#F3F0FF", point:"5000 Koin / 1 kg", counter: useCounter(0, { min: 0 }) },
-    { nama: "Kertas", logo: <IconNotebook stroke={2} style={{ color: "#373A40" }} />, bgColor: "#F1F3F5", point:"500 Koin / ½ kg", counter: useCounter(0, { min: 0 }) },
-  ];
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

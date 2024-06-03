@@ -24,33 +24,6 @@ import Gambar2 from "../img/Image Item.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const dataLocal = [
-  {
-    bank_sampah: "Bank Sampah 1",
-    item_sampah: "bottle ,cardboard, paper",
-    location: "Suite 55",
-  },
-  {
-    bank_sampah: "Bank Sampah 2",
-    item_sampah: "paper, bottle",
-    location: "PO Box 41613",
-  },
-  {
-    bank_sampah: "Bank Sampah 3",
-    item_sampah: "bottle",
-    location: "PO Box 50058",
-  },
-  {
-    bank_sampah: "Bank Sampah 4",
-    item_sampah: "paper",
-    location: "8th Floor",
-  },
-  {
-    bank_sampah: "Bank Sampah 5",
-    item_sampah: "paper, cardboard",
-    location: "PO Box 57936",
-  },
-];
 
 function HomePage() {
   const [currentDate, setCurrentDate] = useState("");
@@ -149,7 +122,7 @@ function HomePage() {
               },
             }}
           >
-            Setor Sampah
+            <Link to={'/setor-sampah'} style={{color: "#1E90FF"}}>Setor Sampah</Link>
           </Button>
           <Button
             leftIcon={<IconExchange stroke={2} />}
@@ -174,7 +147,7 @@ function HomePage() {
               },
             }}
           >
-            Penukaran
+            <Link to={'/penukaran'} style={{color: "#1E90FF"}}>Penukaran</Link>
           </Button>
         </Group>
       </Container>

@@ -57,7 +57,7 @@
         localStorage.setItem('token', response.data.token);
 
         // Navigasi ke halaman beranda setelah login berhasil
-        navigate('/');
+        navigate('/beranda');
       } catch (err) {
         console.log("Error response:", err.response); // Debugging log
         setError("Sepertinya ada yang salah. Silakan coba lagi.");
