@@ -43,7 +43,7 @@ function RegisterPage() {
 
   useEffect(() => {
     axios
-      .get("http://admin.gama.fr.to/api/v1/auth")
+      .get("http://127.0.0.1:8000/api/v1/auth")
       .then((data) => {
         setUrl(data.data.url);
       });
@@ -53,7 +53,7 @@ function RegisterPage() {
   const handleSubmit = async (values) => {
 
     try {
-      const response = await axios.post("http://admin.gama.fr.to/api/v1/auth/register", values);
+      const response = await axios.post("http://127.0.0.1:8000/api/v1/auth/register", values);
       console.log("Registrasi berhasil:", response.data);
       navigate('/masuk');
     } catch (error) {
@@ -160,7 +160,6 @@ function RegisterPage() {
           <Anchor<"a"> href={url} ta={"center"} size="sm" my={"sm"}>
             Daftar dengan Google
           </Anchor>
-          Daftar dengan Google
         </GoogleButton>
 
         <Group justify="center" align="center">

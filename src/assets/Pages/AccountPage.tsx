@@ -27,7 +27,7 @@ function AccountPage() {
     setCurrentDate(today.toLocaleDateString("id-ID", options));
 
     // Mengambil data profil dari API
-    fetch("http://admin.gama.fr.to/api/v1/profile")
+    fetch("http://127.0.0.1:8000/api/v1/profile")
       .then((response) => response.json())
       .then((data) => {
         setProfileData({
@@ -46,7 +46,7 @@ function AccountPage() {
 
     // Memeriksa apakah token tersedia di local storage
     if (token) {
-      fetch("http://admin.gama.fr.to/api/v1/auth/logout", {
+      fetch("http://127.0.0.1:8000/api/v1/auth/logout", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

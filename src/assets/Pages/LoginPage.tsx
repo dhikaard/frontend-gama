@@ -39,7 +39,7 @@
     });
 
     useEffect(() => {
-      axios.get("http://admin.gama.fr.to/api/v1/auth").then((data) => {
+      axios.get("http://127.0.0.1:8000/api/v1/auth").then((data) => {
         setUrl(data.data.url);
       });
     }, []);
@@ -47,7 +47,7 @@
     const handleSubmit = async (values) => {
       console.log("Submitting form with values:", values); // Debugging log
       try {
-        const response = await axios.post("http://admin.gama.fr.to/api/v1/auth/login", {
+        const response = await axios.post("http://127.0.0.1:8000/api/v1/auth/login", {
           login: values.login,
           password: values.password,
         });
