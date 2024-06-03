@@ -51,7 +51,7 @@ function ExchangePage() {
     const today = new Date();
     const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
     setCurrentDate(today.toLocaleDateString('id-ID', options));
-    fetch('http://admin.gama.fr.to/api/v1/waste-bank')
+    fetch('http://127.0.0.1:8000/api/v1/waste-bank')
     .then(response => response.json())
     .then(data => setBankSampah(data))
     .catch(error => console.error('Error:', error));

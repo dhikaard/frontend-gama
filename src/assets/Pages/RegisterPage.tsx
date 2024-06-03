@@ -160,7 +160,6 @@ function RegisterPage() {
           <Anchor<"a"> href={url} ta={"center"} size="sm" my={"sm"}>
             Daftar dengan Google
           </Anchor>
-          Daftar dengan Google
         </GoogleButton>
 
         <Group justify="center" align="center">

@@ -10,7 +10,7 @@ const GoogleCallback = () => {
   useEffect(() => {
       const fetchUser = async () => {
           try {
-              const response = await axios.get(`http://admin.gama.fr.to/api/v1/auth/callback${location.search}`);
+              const response = await axios.get(`http://127.0.0.1:8000/api/v1/auth/callback${location.search}`);
               const {user, token} = response.data;
               
               localStorage.setItem('token', token);
