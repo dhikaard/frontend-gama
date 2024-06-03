@@ -21,6 +21,7 @@ import {
 } from "@tabler/icons-react";
 import Gambar1 from "../img/img.png";
 import Gambar2 from "../img/Image Item.png";
+import { Link } from "react-router-dom";
 
 const dataLocal = [
   {
@@ -142,7 +143,7 @@ function HomePage() {
       </Flex>
 
       <Container>
-        <Group position="apart" mb="1rem" justify="space-between">
+        <Group pos="apart" mb="1rem" justify="space-between">
           <Text size="md">Layanan</Text>
           <Button
             variant="subtle"
@@ -151,7 +152,7 @@ function HomePage() {
             Lihat Semua
           </Button>
         </Group>
-        <Group position="center" spacing="lg">
+        <Group pos="center" spacing="lg">
           <Button
             leftIcon={<IconRecycle stroke={2} />}
             variant="subtle"
@@ -206,7 +207,7 @@ function HomePage() {
       </Container>
 
       <Container mt="2rem">
-        <Group position="apart" mb="1rem">
+        <Group pos="apart" mb="1rem">
           <Text size="md">Event</Text>
           <Button
             variant="subtle"
@@ -225,7 +226,7 @@ function HomePage() {
       </Container>
 
       <Container mt="2rem">
-        <Group position="apart" mb="1rem">
+        <Group pos="apart" mb="1rem">
           <Text size="md">Artikel</Text>
           <Button
             variant="subtle"
@@ -247,14 +248,13 @@ function HomePage() {
       </Container>
 
       {/* Navigation Buttons */}
-      <Container className="Navbutton">
-        <Flex
+      <Flex
           justify="space-around"
           align="center"
           style={{
             position: "fixed",
             bottom: 0,
-            width: "100%",
+            width: "25.75rem",
             backgroundColor: "#fff",
             padding: "10px 0",
             boxShadow: "0 -2px 10px rgba(0, 0, 0, 0.1)",
@@ -270,7 +270,7 @@ function HomePage() {
             }}
           >
             <IconHome size={24} />
-            <Text size="xs">Beranda</Text>
+            <Text size="xs"><Link to={'/'} style={{color: "#737373"}}>Beranda</Link></Text>
           </Button>
           <Button
             variant="subtle"
@@ -282,7 +282,7 @@ function HomePage() {
             }}
           >
             <IconHistory size={24} />
-            <Text size="xs">Riwayat</Text>
+            <Text size="xs"><Link to={'/riwayat'} style={{color: "#737373"}}>Riwayat</Link></Text>
           </Button>
           <Button
             variant="subtle"
@@ -294,10 +294,9 @@ function HomePage() {
             }}
           >
             <IconUser size={24} />
-            <Text size="xs">Akun</Text>
+            <Text size="xs"><Link to={'/akun'} style={{color: "#737373"}}>Akun</Link></Text>
           </Button>
-        </Flex>
-      </Container>
+        </Flex>
     </div>
   );
 }
