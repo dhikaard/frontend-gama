@@ -111,7 +111,6 @@
             withAsterisk
             mt="0.56rem"
             radius="xl"
-            placeholder="email"
             {...form.getInputProps("login")}
           />
 
@@ -121,7 +120,6 @@
             className="register-input"
             mt="0.56rem"
             radius="xl"
-            placeholder="Kata Sandi"
             {...form.getInputProps("password")}
           />
 
