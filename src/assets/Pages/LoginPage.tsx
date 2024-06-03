@@ -15,7 +15,6 @@
   import { useForm, isEmail, isNotEmpty } from "@mantine/form";
   import { useNavigate } from "react-router-dom";
   import LogoGama from "../img/logo.svg";
-  import LogoGamaType from "../img/logotype.svg";
 
   // Import Icon
   import { GoogleButton } from "../Components/GoogleButton";
@@ -39,7 +38,7 @@
     });
 
     useEffect(() => {
-      axios.get("http://admin.gama.fr.to/api/v1/auth").then((data) => {
+      axios.get("https://admin.gama.fr.to/api/v1/auth").then((data) => {
         setUrl(data.data.url);
       });
     }, []);
@@ -47,7 +46,7 @@
     const handleSubmit = async (values) => {
       console.log("Submitting form with values:", values); // Debugging log
       try {
-        const response = await axios.post("http://admin.gama.fr.to/api/v1/auth/login", {
+        const response = await axios.post("https://admin.gama.fr.to/api/v1/auth/login", {
           login: values.login,
           password: values.password,
         });

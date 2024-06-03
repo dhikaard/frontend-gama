@@ -22,6 +22,7 @@ import {
 import Gambar1 from "../img/img.png";
 import Gambar2 from "../img/Image Item.png";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const dataLocal = [
   {
@@ -59,51 +60,23 @@ function HomePage() {
     setCurrentDate(today.toLocaleDateString("id-ID", options));
   }, []);
 
-  const [bankSampah, setBankSampah] = useState<any[]>([]);
-  const [searchValue, setSearchValue] = useState("");
-
-  const [showAlert, setShowAlert] = useState(true);
-  const handleCloseAlert = () => setShowAlert(false);
+  const [username, setUsername] = useState({});
+  const [wallet, setWallet] = useState({});
+  const token = localStorage.getItem('token');
 
   useEffect(() => {
-    setBankSampah(dataLocal);
-  }, []);
-
-  const filteredBankSampah = bankSampah
-    .map((item) => item.bank_sampah)
-    .filter((item) =>
-      item.toLowerCase().includes(searchValue.toLowerCase())
-    );
-
-  const produkData = [
-    {
-      nama: "Botol Plastik",
-      logo: (
-        <IconBottle stroke={2} style={{ color: "#1971C2" }} />
-      ),
-      bgColor: "#E7F5FF",
-      point: "1000 Koin / ½ liter",
-      counter: useCounter(0, { min: 0 }),
-    },
-    {
-      nama: "Kardus",
-      logo: (
-        <IconPackage stroke={2} style={{ color: "#7950F2" }} />
-      ),
-      bgColor: "#F3F0FF",
-      point: "5000 Koin / 1 kg",
-      counter: useCounter(0, { min: 0 }),
-    },
-    {
-      nama: "Kertas",
-      logo: (
-        <IconNotebook stroke={2} style={{ color: "#373A40" }} />
-      ),
-      bgColor: "#F1F3F5",
-      point: "500 Koin / ½ kg",
-      counter: useCounter(0, { min: 0 }),
-    },
-  ];
+    axios.get('https://admin.gama.fr.to/api/v1/profile/wallet', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then(data => {
+      console.log(data.data.user.full_name);
+      console.log(data.data.wallet.balance);
+      setUsername(data.data.user);
+      setWallet(data.data.wallet);
+    })
+    .catch(err => console.log(err));
+  }, [username])
 
   return (
     <div className="home-page">
@@ -114,12 +87,12 @@ function HomePage() {
               <Text fw={500} size="lg" mr="0.5rem">
                 Hai,
               </Text>
-              <Text fw={700} size="lg" mb="sm">Roger Dias</Text>
+              <Text fw={700} size="lg" mb="sm">{username.full_name}</Text>
             </Flex>
             <Group justify="space-between" mb="0.25rem">
               <Flex align="center">
                 <Text size="1.5rem" fw={600} lh="120%" mr="8px">
-                  1000
+                {wallet.balance * 100}
                 </Text>
                 <Text size="md">Koin</Text>
               </Flex>
@@ -128,7 +101,7 @@ function HomePage() {
               </Text>
               <Flex align="center">
                 <Text size="1.5rem" fw={600} lh="120%" mr="8px">
-                  100.000
+                  {wallet.balance}
                 </Text>
                 <Text size="md">IDR</Text>
               </Flex>

@@ -32,7 +32,7 @@ function RegisterPage() {
       email: "",
       password: "",
     },
-    validate: {
+    validate: { 
       full_name: hasLength({ min: 2, max: 45 }),
       address: isNotEmpty(),
       phone_number: hasLength({ min: 2, max: 15 }),
@@ -43,7 +43,7 @@ function RegisterPage() {
 
   useEffect(() => {
     axios
-      .get("http://admin.gama.fr.to/api/v1/auth")
+      .get("https://admin.gama.fr.to/api/v1/auth")
       .then((data) => {
         setUrl(data.data.url);
       });
@@ -53,7 +53,7 @@ function RegisterPage() {
   const handleSubmit = async (values) => {
 
     try {
-      const response = await axios.post("http://admin.gama.fr.to/api/v1/auth/register", values);
+      const response = await axios.post("https://admin.gama.fr.to/api/v1/auth/register", values);
       console.log("Registrasi berhasil:", response.data);
       navigate('/masuk');
     } catch (error) {
